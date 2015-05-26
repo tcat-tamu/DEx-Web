@@ -1,0 +1,29 @@
+{
+  "name": "dex.web.site",
+  "version": "1.0.0",
+  "description": "Main website for the DEx project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.citd.tamu.edu:dex.web.site"
+  },
+  "author": "Matthew Barry <mbarry@tamu.edu>",
+  "license": "MIT",
+  "devDependencies": {
+    "amd-optimize": "^0.4.3",
+    "gulp": "^3.8.11",
+    "gulp-autoprefixer": "^2.3.0",
+    "gulp-concat": "^2.5.2",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-less": "^3.0.3",
+    "gulp-merge": "^0.1.1",
+    "gulp-nunjucks": "^1.0.3",
+    "gulp-nunjucks-render": "^0.2.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-uglify": "^1.2.0"
+  }
+}

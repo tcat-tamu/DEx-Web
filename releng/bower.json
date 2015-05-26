@@ -1,0 +1,17 @@
+{
+  "name": "dex.web.site",
+  "version": "1.0.0",
+  "authors": [
+    "Matthew Barry <mbarry@tamu.edu>"
+  ],
+  "description": "Main website for the DEx project",
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "bootstrap": "~3.3.4",
+    "almond": "~0.3.1",
+    "font-awesome": "~4.3.0"
+  }
+}
