@@ -1,0 +1,155 @@
+.facet-controls {
+
+   .facet-group {
+      h1 {
+         font-size: 1.2em;
+         border-bottom: 1px solid gray;
+         cursor: pointer;
+
+         .glyphicon {
+            margin-right: .25em;
+            font-size: .7em;
+         }
+
+         .glyphicon-chevron-right {
+            display: none;
+         }
+
+         .glyphicon-chevron-down, a.collapsed .glyphicon-chevron-right {
+            display: inline-block;
+         }
+
+         a.collapsed .glyphicon-chevron-down {
+            display: none;
+         }
+
+         div.pull-right i.glyphicon {
+            opacity: .5;
+            font-size: .9em;
+
+            &:hover {
+               opacity: .8;
+            }
+         }
+      }
+
+      &.sort-alpha {
+         .glyphicon-sort-by-alphabet-alt {
+            display: inline-block;
+         }
+
+         .glyphicon-sort-by-alphabet, .glyphicon-sort-by-order {
+            display: none;
+         }
+
+         .glyphicon-sort-by-order-alt {
+            display: inline-block;
+         }
+      }
+
+      &.sort-alpha-alt {
+         .glyphicon-sort-by-alphabet-alt {
+            display: none;
+         }
+
+         .glyphicon-sort-by-alphabet {
+            display: inline-block;
+         }
+
+         .glyphicon-sort-by-order {
+            display: none;
+         }
+
+         .glyphicon-sort-by-order-alt {
+            display: inline-block;
+         }
+      }
+
+      &.sort-count {
+         .glyphicon-sort-by-alphabet-alt {
+            display: none;
+         }
+
+         .glyphicon-sort-by-alphabet {
+            display: inline-block;
+         }
+
+         .glyphicon-sort-by-order {
+            display: none;
+         }
+
+         .glyphicon-sort-by-order-alt {
+            display: inline-block;
+         }
+      }
+
+      &.sort-count-alt {
+         .glyphicon-sort-by-alphabet-alt {
+            display: none;
+         }
+         .glyphicon-sort-by-alphabet, .glyphicon-sort-by-order {
+            display: inline-block;
+         }
+      }
+
+      &.sort-count-alt .glyphicon-sort-by-order-alt {
+         display: none;
+      }
+
+      ul {
+         list-style: none;
+         padding: 0;
+         margin: 0;
+
+         li.checkbox {
+            margin: 0;
+         }
+
+         li a {
+            color: gray;
+            text-decoration: none;
+         }
+      }
+
+      .toggle-extra-handle {
+         .show-all { display: none; }
+         .show-fewer { display: inline; }
+
+         &.collapsed {
+            .show-all { display: inline; }
+            .show-fewer { display: none; }
+         }
+      }
+   }
+}
+
+.extract-list {
+   .extract {
+      padding: 1em;
+      border-bottom: 1px solid silver;
+
+      p {
+         font-size: 1.2em;
+      }
+
+      .extract-citation {
+         padding-left: 3em;
+      }
+
+      &:nth-child(odd) {
+         background-color: #f0f0f0;
+      }
+   }
+
+   &.show-original .extract .original {
+      display: block;
+   }
+
+   &.show-normalized .extract .original, &.show-original .extract .normalized {
+      display: none;
+   }
+
+   &.show-normalized .extract .normalized {
+      display: block;
+   }
+}
