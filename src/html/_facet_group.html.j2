@@ -1,0 +1,49 @@
+{% macro item(slug, facet) %}
+   <li class="checkbox">
+      <label>
+         <input type="checkbox" name="{{ slug }}" value="{{ facet.id }}" />
+         {{ facet.title }}
+         <a href="#{{ slug }}={{ facet.id }}">
+            <i class="fa fa-external-link-square"></i>
+            <span class="sr-only">open in browser</span>
+         </a>
+         <small class="badge">{{ facet.count }}</small>
+      </label>
+   </li>
+{% endmacro %}
+
+{% macro group(title, slug, facets) %}
+   <section id="facet-{{ slug }}" class="facet-group show-fewer sort-count">
+      <h1 data-toggle="collapse" data-target="#collapse-{{ slug }}" aria-expanded="true" aria-controls="collapse-{{ slug }}">
+         <div class="pull-left">
+            <i class="glyphicon glyphicon-chevron-right"></i>
+            <i class="glyphicon glyphicon-chevron-down"></i>
+         </div>
+         {{ title }}
+         <div class="pull-right">
+            <i class="fa fa-sort-alpha-asc"></i>
+            <i class="fa fa-sort-alpha-desc"></i>
+            <i class="fa fa-sort-numeric-asc"></i>
+            <i class="fa fa-sort-numeric-desc"></i>
+         </div>
+      </h1>
+      <div class="collapse in" id="collapse-{{ slug }}">
+         <ul>
+            {% for i in range(0, 3 if facets|length > 3 else facets|length) %}
+               {{ item(slug, facets[i]) }}
+            {% endfor %}
+         </ul>
+         {% if facets | length > 3 %}
+            <ul class="collapse" id="extra-{{ slug }}">
+               {% for i in range(3, facets|length) %}
+                  {{ item(slug, facets[i]) }}
+               {% endfor %}
+            </ul>
+            <a class="collapsed toggle-extra-handle" href="#extra-{{ slug }}" data-toggle="collapse">
+               <span class="show-all">Show All</span>
+               <span class="show-fewer">Show Fewer</span>
+            </a>
+         {% endif %}
+      </div>
+   </section>
+{% endmacro %}
