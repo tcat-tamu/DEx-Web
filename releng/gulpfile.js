@@ -71,7 +71,8 @@ gulp.task('javascripts', function () {
          findNestedDependencies: true,
          paths: {
             'bootstrap': vendorPath + '/bootstrap/dist/js/bootstrap',
-            'jquery': vendorPath + '/jquery/dist/jquery'
+            'jquery': vendorPath + '/jquery/dist/jquery',
+            'underscore': vendorPath + '/underscore/underscore'
          },
          shim: {
             'bootstrap': ['jquery']
@@ -112,7 +113,10 @@ gulp.task('html', function () {
    return gulp.src([
          srcPath + '/html/index.html.j2',
          srcPath + '/html/browse.html.j2',
-         srcPath + '/html/browse-ms.html.j2'
+         srcPath + '/html/browse-character.html.j2',
+         srcPath + '/html/browse-ms.html.j2',
+         srcPath + '/html/browse-play.html.j2',
+         srcPath + '/html/browse-playwright.html.j2'
       ])
       .pipe(nunjucksRender({
          baseUrl: baseUrl

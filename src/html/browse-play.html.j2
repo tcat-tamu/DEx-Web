@@ -3,7 +3,15 @@
 {% import '_facet_group.html.j2' as facet %}
 {% import '_pagination.html.j2' as pagination %}
 
-{% block title %}Browse Extracts - {{ super() }}{% endblock %}
+{% block title %}The Tragedy of Nero - Plays Browser - {{ super() }}{% endblock %}
+
+{% block header %}
+   <header>
+      <div class="container">
+         <h1>The Tragedy of Nero</h1>
+      </div>
+   </header>
+{% endblock %}
 
 {% block content %}
    <div class="container">
@@ -37,16 +45,6 @@
                      { 'id': 'Beaumont', 'title': 'Francis Beaumont', 'count': 22 }
                   ]) }}
 
-                  {{ facet.group('Plays', 'plays', [
-                     { 'id': 'Anon_TragNero', 'title': 'The Tragedy of Nero (Anonymous)', 'count': 32 },
-                     { 'id': 'BeaumontFletcher_Scornful', 'title': 'The Scornful Lady (Beaumont and Fletcher)', 'count': 302 },
-                     { 'id': 'Cartwright_Slave', 'title': 'The Royal Slave (Cartwright)', 'count': 243 },
-                     { 'id': 'Jonson_Fortunate', 'title': 'The Fortunate Isles, and their Union (Jonson)', 'count': 178 },
-                     { 'id': 'Massinger_Maid', 'title': 'The Maid of Honour (Massinger)', 'count': 124 },
-                     { 'id': 'Shakes_Henry5', 'title': 'Henry V (Shakespeare)', 'count': 67 },
-                     { 'id': 'Webster_Duchess', 'title': 'The Duchess of Malfi (Webster)', 'count': 22 }
-                  ]) }}
-
                   {{ facet.group('Speakers', 'speaker', [
                      { 'id': 'Bourbon', 'title': 'Bourbon (Henry V)', 'count': 32 },
                      { 'id': 'Bertoldo', 'title': 'Bertoldo (The Maid of Honour)', 'count': 302 },
@@ -60,6 +58,24 @@
 
          </div>
          <div class="col-md-9">
+            <div class="page-header">
+               <a class="pull-right btn btn-primary">
+                  <i class="glyphicon glyphicon-download"></i>
+                  <span>Download TEI</span>
+               </a>
+               <h2>Play Info</h2>
+            </div>
+
+            <dl class="dl-horizontal">
+               <dt>Playwright(s)</dt>
+               <dd><a href="#playwrights=Anonymous">Anonymous</a></dd>
+               <dt>Edition(s)</dt>
+               <dd>Elliott M. Hill. <em>Garland: Renaissance Drama: A Collection of Critical Editions</em>. 1979</dd>
+               <dd>
+                  <a href="http://extra.shu.ac.uk/emls/iemls/renplays/tragedyofnero.htm" target="_blank">Tracy Siddle. <em>Early Modern Literary Studies</em>. 2004</a>
+               </dd>
+            </dl>
+
             <div class="page-header">
                <div class="btn-group pull-right" role="group" aria-label="manuscript display text">
                   <button type="button" id="showNormalized" class="btn btn-default active">Normalized</button>

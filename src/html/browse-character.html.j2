@@ -3,7 +3,15 @@
 {% import '_facet_group.html.j2' as facet %}
 {% import '_pagination.html.j2' as pagination %}
 
-{% block title %}Browse Extracts - {{ super() }}{% endblock %}
+{% block title %}Julius Caesar - Characters Browser - {{ super() }}{% endblock %}
+
+{% block header %}
+   <header>
+      <div class="container">
+         <h1>Julius Caesar</h1>
+      </div>
+   </header>
+{% endblock %}
 
 {% block content %}
    <div class="container">
@@ -46,20 +54,25 @@
                      { 'id': 'Shakes_Henry5', 'title': 'Henry V (Shakespeare)', 'count': 67 },
                      { 'id': 'Webster_Duchess', 'title': 'The Duchess of Malfi (Webster)', 'count': 22 }
                   ]) }}
-
-                  {{ facet.group('Speakers', 'speaker', [
-                     { 'id': 'Bourbon', 'title': 'Bourbon (Henry V)', 'count': 32 },
-                     { 'id': 'Bertoldo', 'title': 'Bertoldo (The Maid of Honour)', 'count': 302 },
-                     { 'id': 'Portunus', 'title': 'Portunus (The Fortunate Isles, and their Union)', 'count': 243 },
-                     { 'id': 'Sceuinus', 'title': 'Sceuinus (The Tragedy of Nero)', 'count': 178 },
-                     { 'id': 'Flavius', 'title': 'Flavius (The Tragedy of Nero)', 'count': 124 },
-                     { 'id': 'Prologue_RoyalSlave', 'title': 'Prologue (The Royal Slave)', 'count': 67 }
-                  ]) }}
                </div>
             </form>
 
          </div>
          <div class="col-md-9">
+            <div class="page-header">
+               <a class="pull-right btn btn-primary">
+                  <i class="glyphicon glyphicon-download"></i>
+                  <span>Download TEI</span>
+               </a>
+               <h2>Character Info</h2>
+            </div>
+
+            <dl class="dl-horizontal">
+               <dt>Appeared in</dt>
+               <dd><a href="#plays=Chapman_CaesarPompey">Caesar and Pompey (Chapman)</a></dd>
+               <dd><a href="#plays=Shakes_Caesar">Julius Caesar (Shakespeare)</a></dd>
+            </dl>
+
             <div class="page-header">
                <div class="btn-group pull-right" role="group" aria-label="manuscript display text">
                   <button type="button" id="showNormalized" class="btn btn-default active">Normalized</button>

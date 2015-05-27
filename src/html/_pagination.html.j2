@@ -1,0 +1,84 @@
+{% macro pagination(max, current=1, padding=5) %}
+   <nav>
+      <ul class="pagination">
+         {% if current == 1 %}
+            <li class="disabled">
+               <span aria-label="First">
+                  <i class="fa fa-angle-double-left"></i>
+               </span>
+            </li>
+            <li class="disabled">
+               <span aria-label="Previous">
+                  <i class="fa fa-angle-left"></i>
+               </span>
+            </li>
+         {% else %}
+            <li>
+               <a href="#" aria-label="First">
+                  <i class="fa fa-angle-double-left"></i>
+               </a>
+            </li>
+            <li>
+               <a href="#" aria-label="Previous">
+                  <i class="fa fa-angle-left"></i>
+               </a>
+            </li>
+         {% endif %}
+
+         {% if max <= 2*padding + 1 %}
+            {# range too small to use all of padding #}
+            {% set lo = 1 %}
+            {% set hi = max %}
+         {% elif current <= padding + 1 %}
+            {# up against left boundary #}
+            {% set lo = 1 %}
+            {% set hi = 2*padding + 1 %}
+         {% elif current + padding >= max %}
+            {# up against right boundary #}
+            {% set lo = max - 2*padding %}
+            {% set hi = max %}
+         {% else %}
+            {# plenty of room on either side of current #}
+            {% set lo = current - padding %}
+            {% set hi = current + padding %}
+         {% endif %}
+
+
+         {% for i in range(lo, hi+1) %}
+            {% if i == current %}
+               <li class="active">
+                  <span>{{ i }} <span class="sr-only">(current)</span></span>
+               </li>
+            {% else %}
+               <li>
+                  <a href="#">{{ i }}</a>
+               </li>
+            {% endif %}
+         {% endfor %}
+
+         {% if current == max %}
+            <li class="disabled">
+               <span aria-label="Next">
+                  <i class="fa fa-angle-right"></i>
+               </span>
+            </li>
+            <li class="disabled">
+               <span aria-label="Last">
+                  <i class="fa fa-angle-double-right"></i>
+               </span>
+            </li>
+         {% else %}
+            <li>
+               <a href="#" aria-label="Next">
+                  <i class="fa fa-angle-right"></i>
+               </a>
+            </li>
+            <li>
+               <a href="#" aria-label="Last">
+                  <i class="fa fa-angle-double-right"></i>
+               </a>
+            </li>
+         {% endif %}
+      </ul>
+   </nav>
+{% endmacro %}

@@ -3,6 +3,7 @@
    .facet-group {
       h1 {
          font-size: 1.2em;
+         line-height: 1.4em;
          border-bottom: 1px solid gray;
          cursor: pointer;
 
@@ -33,67 +34,32 @@
          }
       }
 
-      &.sort-alpha {
-         .glyphicon-sort-by-alphabet-alt {
-            display: inline-block;
-         }
+      .icon-sort {
+         display: inline-block;
+      }
 
-         .glyphicon-sort-by-alphabet, .glyphicon-sort-by-order {
+      &.sort-alpha-asc {
+         .icon-sort-alpha-asc, .icon-sort-count-asc {
             display: none;
-         }
-
-         .glyphicon-sort-by-order-alt {
-            display: inline-block;
          }
       }
 
-      &.sort-alpha-alt {
-         .glyphicon-sort-by-alphabet-alt {
+      &.sort-alpha-desc {
+         .icon-sort-alpha-desc, .icon-sort-count-asc {
             display: none;
-         }
-
-         .glyphicon-sort-by-alphabet {
-            display: inline-block;
-         }
-
-         .glyphicon-sort-by-order {
-            display: none;
-         }
-
-         .glyphicon-sort-by-order-alt {
-            display: inline-block;
          }
       }
 
-      &.sort-count {
-         .glyphicon-sort-by-alphabet-alt {
+      &.sort-count-asc {
+         .icon-sort-alpha-desc, .icon-sort-count-asc {
             display: none;
-         }
-
-         .glyphicon-sort-by-alphabet {
-            display: inline-block;
-         }
-
-         .glyphicon-sort-by-order {
-            display: none;
-         }
-
-         .glyphicon-sort-by-order-alt {
-            display: inline-block;
          }
       }
 
-      &.sort-count-alt {
-         .glyphicon-sort-by-alphabet-alt {
+      &.sort-count-desc {
+         .icon-sort-alpha-desc, .icon-sort-count-desc {
             display: none;
          }
-         .glyphicon-sort-by-alphabet, .glyphicon-sort-by-order {
-            display: inline-block;
-         }
-      }
-
-      &.sort-count-alt .glyphicon-sort-by-order-alt {
-         display: none;
       }
 
       ul {
@@ -101,12 +67,17 @@
          padding: 0;
          margin: 0;
 
-         li.checkbox {
+         .checkbox {
             margin: 0;
          }
 
+         small.badge {
+            background: #aaa;
+            font-size: 0.85em;
+            padding: 2px 6px;
+         }
+
          li a {
-            color: gray;
             text-decoration: none;
          }
       }
@@ -127,6 +98,23 @@
    .extract {
       padding: 1em;
       border-bottom: 1px solid silver;
+
+      .label {
+         border-radius: 0;
+         color: inherit;
+         font-size: inherit;
+         padding: 0;
+         margin: 0;
+         background: transparent;
+         font-style: italic;
+      }
+
+      blockquote {
+         font-size: inherit;
+         border: none;
+         color: inherit;
+         line-height: 1.3em;
+      }
 
       p {
          font-size: 1.2em;
@@ -152,4 +140,8 @@
    &.show-normalized .extract .normalized {
       display: block;
    }
+}
+
+.page-header .pagination {
+   margin: 0 0.5em;
 }

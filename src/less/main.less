@@ -41,3 +41,22 @@
       margin-top: 120px;
    }
 }
+
+
+/* OVERRIDE BUTTON GROUP BORDER RADIUS
+-------------------------------------------------- */
+.btn-group {
+   > .btn.btn-group-left {
+      border-top-left-radius: 3px !important;
+      border-bottom-left-radius: 3px !important;
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+   }
+
+   > .btn.btn-group-right {
+      border-top-left-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+      border-top-right-radius: 3px !important;
+      border-bottom-right-radius: 3px !important;
+   }
+}
