@@ -1,8 +1,35 @@
 /* GLOBAL STYLES
 -------------------------------------------------- */
 body {
-   padding-bottom: 40px;
    color: #5a5a5a;
+
+   > header {
+      background-color: #777;
+      background-image: url(../images/quill-manuscript.jpg);
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      padding-top: 70px;
+      @media (min-width: 768px) {
+         padding-top: 90px;
+      }
+
+      color: #fff;
+      text-shadow: 0 0 5px #000;
+   }
+
+   > main {
+      padding-top: 1.5em;
+   }
+
+   > footer {
+      border-top: 2px dotted #ddd;
+      margin-top: 1.5em;
+      padding: 1.5em 0;
+      font-size: 0.9em;
+      color: #888;
+   }
 }
 
 
@@ -43,23 +70,4 @@ body {
          width: auto;
       }
    }
-}
-
-
-/* HEADER IMAGE
--------------------------------------------------- */
-header {
-   background-color: #777;
-   background-image: url(../images/quill-manuscript.jpg);
-   background-position: 50% 50%;
-   background-repeat: no-repeat;
-   background-size: cover;
-
-   padding-top: 70px;
-   @media (min-width: 768px) {
-      padding-top: 90px;
-   }
-
-   color: #fff;
-   text-shadow: 0 0 5px #000;
 }

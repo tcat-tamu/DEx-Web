@@ -3,12 +3,12 @@
 {% import '_facet_group.html.j2' as facet %}
 {% import '_pagination.html.j2' as pagination %}
 
-{% block title %}William Shakespeare - Playwrights Browser - {{ super() }}{% endblock %}
+{% block title %}British Library Manuscript Additional 10309 - Manuscripts Browser - {{ super() }}{% endblock %}
 
 {% block header %}
    <header>
       <div class="container">
-         <h1>William Shakespeare</h1>
+         <h1>British Library Manuscript Additional 10309</h1>
       </div>
    </header>
 {% endblock %}
@@ -24,14 +24,14 @@
                      <button type="submit" class="btn btn-primary" type="button">Go</button>
                </div>
                <div class="facet-controls">
-                  {{ facet.group('Manuscripts', 'ms', [
-                     { 'id': 'BLMSAdd10309', 'title': 'British Library Additional Manuscript 10309', 'count': 32 },
-                     { 'id': 'BLMSAdd64078', 'title': 'British Library Additional MS 64078', 'count': 302 },
-                     { 'id': 'BLMSLansdowne1185', 'title': 'BL Lansdowne 1185', 'count': 243 },
-                     { 'id': 'BodleianMSSancroft29', 'title': 'Bodleian MS Sancroft 29', 'count': 178 },
-                     { 'id': 'FolgerMSVa87', 'title': 'Folger MS V.a.87', 'count': 124 },
-                     { 'id': 'HarvardMSFr487', 'title': 'Harvard MS Fr. 487', 'count': 67 },
-                     { 'id': 'UChicago_MS824', 'title': 'University of Chicago MS 824', 'count': 22 }
+                  {{ facet.group('Playwrights', 'playwrights', [
+                     { 'id': 'BLMSAdd10309', 'title': 'Anonymous', 'count': 432 },
+                     { 'id': 'Cartwright', 'title': 'William Cartwright', 'count': 302 },
+                     { 'id': 'Shakespeare', 'title': 'William Shakespeare', 'count': 243 },
+                     { 'id': 'Massinger', 'title': 'Philip Massinger', 'count': 178 },
+                     { 'id': 'Webster', 'title': 'John Webster', 'count': 124 },
+                     { 'id': 'Jonson', 'title': 'Ben Johnson', 'count': 67 },
+                     { 'id': 'Beaumont', 'title': 'Francis Beaumont', 'count': 22 }
                   ]) }}
 
                   {{ facet.group('Plays', 'plays', [
@@ -57,6 +57,30 @@
 
          </div>
          <div class="col-md-9" class="extracts">
+
+            <div class="page-header">
+               <a class="pull-right btn btn-primary">
+                  <i class="glyphicon glyphicon-download"></i>
+                  <span>Download TEI</span>
+               </a>
+               <h2>Manuscript Info</h2>
+            </div>
+
+            <dl class="dl-horizontal">
+               <dt>MS Author(s)</dt>
+               <dd>Margaret Bellasys</dd>
+               <dt>Extract Count</dt>
+               <dd>4</dd>
+               <dt>Available from</dt>
+               <dd>
+                  <a href="http://www.celm-ms.org.uk/repositories/british-library-additional-10000.html#british-library-additional-10000_id647661" target="_blank">CELM</a>
+               </dd>
+               <dt>License</dt>
+               <dd>
+                  <a href="https://creativecommons.org/licenses/by-nc/4.0/legalcode" target="_blank">Creative Commons CC-BY-NC 4.0</a>
+               </dd>
+            </dl>
+
             <div class="page-header toolbar">
                <div class="btn-group pull-right" role="group" aria-label="manuscript display text">
                   <button type="button" id="showNormalized" class="btn btn-default active">Normalized</button>
@@ -177,7 +201,6 @@
                </div>
 
             </div>
-
          </div>
       </div>
    </div>

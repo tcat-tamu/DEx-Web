@@ -17,7 +17,7 @@ var srcPath = '../src/';
 var stagingPath = '../build';
 var vendorPath = stagingPath + '/vendor';
 var distPath = '../dist/';
-var baseUrl = '/~matt.barry/dex-site';
+var baseUrl = '';
 
 
 function makeCopyTask(source, dest) {
@@ -71,11 +71,16 @@ gulp.task('javascripts', function () {
          findNestedDependencies: true,
          paths: {
             'bootstrap': vendorPath + '/bootstrap/dist/js/bootstrap',
+            'freewall': vendorPath + '/freewall/freewall',
             'jquery': vendorPath + '/jquery/dist/jquery',
+            'promise': vendorPath + '/bluebird/js/browser/bluebird',
             'underscore': vendorPath + '/underscore/underscore'
          },
          shim: {
-            'bootstrap': ['jquery']
+            'bootstrap': ['jquery'],
+            'freewall': {
+               exports: 'freewall'
+            }
          },
          exclude: ['config']
       }))
@@ -112,11 +117,15 @@ gulp.task('html', function () {
 
    return gulp.src([
          srcPath + '/html/index.html.j2',
+         srcPath + '/html/about.html.j2',
+         srcPath + '/html/bibliography.html.j2',
          srcPath + '/html/browse.html.j2',
          srcPath + '/html/browse-character.html.j2',
          srcPath + '/html/browse-ms.html.j2',
+         srcPath + '/html/browse-ms-blmsadd10309.html.j2',
          srcPath + '/html/browse-play.html.j2',
-         srcPath + '/html/browse-playwright.html.j2'
+         srcPath + '/html/browse-playwright.html.j2',
+         srcPath + '/html/search-advanced.html.j2'
       ])
       .pipe(nunjucksRender({
          baseUrl: baseUrl

@@ -1,0 +1,111 @@
+{% extends 'layout.html.j2' %}
+
+{% block header %}
+   <header>
+      <div class="container">
+         <h1>About the DEx Project</h1>
+      </div>
+   </header>
+{% endblock %}
+
+{% block content %}
+   <main class="container">
+      <article>
+         <header>
+            <p class="lead">
+               <strong>DEx: A Database of Dramatic Extracts</strong> is an online, searchable database of extracts transcribed from seventeenth-century manuscripts and aims to provide much-needed information to textual editors, literary scholars, and cultural historians interested in theater history, audience reception, early modern print and manuscript culture, and the history of reading.
+            </p>
+         </header>
+
+         <section id="overview">
+            <header class="page-header">
+               <h1>Overview</h1>
+            </header>
+
+            <p>
+               Early modern readers and playgoers often kept commonplace books and miscellanies, where they would copy poems, aphorisms, letters, accounts, and any number of things&mdash;including selections from plays. <strong>DEx: A Database of Dramatic Extracts</strong> aids scholars in finding selections from plays copied into manuscripts. While contemporary readers often overlook lesser-known historical plays and playwrights, early modern readers did not make the same distinction.
+            </p>
+
+            <p>
+               Extant manuscript evidence suggests the phenomenon of copy selections from English plays began around the 1590s; so DEx focuses on seventeenth-centry manuscripts. Although the practice continued in the Restoration, at the moment DEx catalogs only extracts from plays written and published before the closure of theaters in 1642.
+            </p>
+
+            <p>
+               DEx: A Database of Dramatic Extracts is an online, searchable database of the extracts transcribed from these manuscripts and published by <a href="http://www.itergateway.org/" target="_blank">Iter: Gateway to the Middle Ages and Renaissance</a>.
+            </p>
+         </section>
+
+         <section id="staff">
+            <header class="page-header">
+               <h1>Staff</h1>
+            </header>
+
+            <div class="row">
+               <div class="col-md-4 col-sm-6">
+                  <div class="staff-member">
+                     <img class="img-circle" src="//placehold.it/150x150" alt="placeholder image for a staff person">
+                     <h2>Laura Estill</h2>
+                     <p>
+                        Laura is the one with the vision.
+                     </p>
+                  </div>
+               </div>
+
+               <div class="col-md-4 col-sm-6">
+                  <div class="staff-member">
+                     <img class="img-circle" src="//placehold.it/150x150" alt="placeholder image for a staff person">
+                     <h2>John Doe</h2>
+                     <p>
+                        A sample person just to take up more space. John likes pi&ntilde;a coladas and getting caught in the rain.
+                     </p>
+                  </div>
+               </div>
+
+               <div class="col-md-4 col-sm-6">
+                  <div class="staff-member">
+                     <img class="img-circle" src="//placehold.it/150x150" alt="placeholder image for a staff person">
+                     <h2>Jane Doe</h2>
+                     <p>
+                        Jane can speak latin. Here's what she has to say: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend urna vitae condimentum interdum. In quis dignissim tortor. Suspendisse potenti."
+                     </p>
+                  </div>
+               </div>
+            </div>
+
+
+
+         </section>
+
+         <section id="sponsors">
+            <header class="page-header">
+               <h1>Sponsors</h1>
+            </header>
+            <div id="sponsorsWall">
+               <a class="sponsor" href="http://banting.fellowships-bourses.gc.ca/home-accueil-eng.html">
+                  <img src="{{ baseUrl }}/images/sponsors/banting.jpg" alt="Banting Postdoctoral Fellowships">
+               </a>
+               <a class="sponsor" href="http://www.sshrc-crsh.gc.ca/">
+                  <img src="{{ baseUrl }}/images/sponsors/sshrc-crsh.jpg" alt="Social Sciences and Humanities Research Council">
+               </a>
+               <a class="sponsor" href="http://www.itergateway.org">
+                  <img src="{{ baseUrl }}/images/sponsors/iter.jpg" alt="Iter: Gateway to the Middle Ages and Renaissance">
+               </a>
+               <a class="sponsor" href="http://idhmc.tamu.edu/">
+                  <img src="{{ baseUrl }}/images/sponsors/tamu-idhmc.png" alt="Initiative for Digital Humanities, Media, and Culture at Texas A&amp;M University">
+               </a>
+               <a class="sponsor" href="http://etcl.uvic.ca/">
+                  <img src="{{ baseUrl }}/images/sponsors/uvic-etcl.png" alt="University of Victoria Electronic Textual Cultures Lab">
+               </a>
+               <a class="sponsor" href="http://tcat.tamu.edu">
+                  <img src="{{ baseUrl }}/images/sponsors/tees-tcat_inv.png" alt="Texas Center for Applied Technology">
+               </a>
+            </div>
+         </section>
+      </article>
+   </main>
+{% endblock %}
+
+{% block javascripts %}
+   {{ super() }}
+   <script>require('about');</script>
+{% endblock %}
