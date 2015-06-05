@@ -17,7 +17,7 @@ var srcPath = '../src/';
 var stagingPath = '../build';
 var vendorPath = stagingPath + '/vendor';
 var distPath = '../dist/';
-var baseUrl = '';
+var baseUrl = '/~matt.barry/dex-site';
 
 
 function makeCopyTask(source, dest) {
@@ -53,7 +53,7 @@ gulp.task('stylesheets', ['fonts'], function () {
 
 
 gulp.task('templates', function () {
-   gulp.src(srcPath + '/js/templates/**/*.j2')
+   gulp.src(srcPath + '/templates/**/*.j2')
       .pipe(nunjucksCompile({
          name: function (file) {
             // strip trailing '.j2' extension
@@ -70,9 +70,14 @@ gulp.task('javascripts', function () {
       .pipe(amdOptimize('main', {
          findNestedDependencies: true,
          paths: {
+            'backbone': vendorPath + '/backbone/backbone',
+            'backbone.babysitter': vendorPath + '/backbone.babysitter/lib/backbone.babysitter',
+            'backbone.wreqr': vendorPath + '/backbone.wreqr/lib/backbone.wreqr',
             'bootstrap': vendorPath + '/bootstrap/dist/js/bootstrap',
             'freewall': vendorPath + '/freewall/freewall',
             'jquery': vendorPath + '/jquery/dist/jquery',
+            'marionette': vendorPath + '/marionette/lib/core/backbone.marionette',
+            'nunjucks': vendorPath + '/nunjucks/browser/nunjucks-slim',
             'promise': vendorPath + '/bluebird/js/browser/bluebird',
             'underscore': vendorPath + '/underscore/underscore'
          },

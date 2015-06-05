@@ -20,27 +20,6 @@ define(function(require) {
 
 
    $(function () {
-      var $btnShowOriginal = $('button#showOriginal');
-      var $btnShowNormalized = $('button#showNormalized');
-      var $extractList = $('#extractList');
-
-      $btnShowNormalized.on('click', function () {
-         $btnShowNormalized.addClass('active');
-         $btnShowOriginal.removeClass('active');
-         $extractList
-            .removeClass('show-original')
-            .addClass('show-normalized');
-      });
-
-      $btnShowOriginal.on('click', function () {
-         $btnShowOriginal.addClass('active');
-         $btnShowNormalized.removeClass('active');
-         $extractList
-            .removeClass('show-normalized')
-            .addClass('show-original');
-      });
-
-
       var SORT_CLASSES = _.map(product(['alpha', 'count'], ['asc', 'desc']), function (xs) { return 'sort-' + xs.join('-'); });
 
       var $groups = $('.facet-group');

@@ -6,6 +6,7 @@
 
    "rules": {
       "quotes": [1, "single"],
-      "strict": 0
+      "strict": 0,
+      "no-underscore-dangle": 0
    }
 }
