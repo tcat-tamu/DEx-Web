@@ -158,6 +158,6 @@ gulp.task('watch', ['default'], function () {
    gulp.watch(srcPath + '/html/**/*.html.j2', ['html']);
    gulp.watch(srcPath + '/images/**/*', ['images']);
    gulp.watch(srcPath + '/js/**/*.js', ['javascripts']);
-   gulp.watch(srcPath + '/js/templates/**/*.j2', ['templates']);
+   gulp.watch(srcPath + '/templates/**/*.j2', ['templates']);
    gulp.watch(srcPath + '/less/**/*.less', ['stylesheets']);
 });
