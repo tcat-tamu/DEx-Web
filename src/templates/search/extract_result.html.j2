@@ -2,6 +2,12 @@
 <div class="normalized">{{ normalized }}</div>
 
 <div class="extract-citation">
-   <div><span>Folger MS V.a.262</span> (<span>f. 5v</span>)</div>
-   <div>by <span>Lady Macbeth</span> in <span><em>Macbeth</em></span> (<span>Shakespeare</span>)</div>
+   <div>from <a href="#{{ manuscript.id }}"><span>{{ manuscript.display | default(manuscript.id) }}</span> (<span>{{ author }}</span>)</a></div>
+   <div>by <span class="speakers">{% for speaker in speakers -%}
+      <a class="speaker" href="#{{ speaker.id }}">{{ speaker.display | default(speaker.id) }}</a>
+      {%- if not loop.last %}, {% endif -%}
+   {%- endfor %}</span> in <a href="#{{ source.id }}" class="source"><em>{{ source.display | default(source.id) }}</em></a> (<span class="playwrights">{% for playwright in playwrights -%}
+      <a class="playwright" href="#{{ playwright.id }}">{{ playwright.display | default(playwright.id) }}</a>
+      {%- if not loop.last %}, {% endif -%}
+   {%- endfor %}</span>) <span class="source-line-ref">{{ sourceLineRef }}</span></div>
 </div>

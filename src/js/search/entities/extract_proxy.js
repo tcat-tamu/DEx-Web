@@ -23,12 +23,13 @@ define(function (require) {
       defaults: function () {
          return {
             manuscript: new Reference(),
+            author: '',
             sourceId: null,
             sourceLineRef: null,
             normalized: '',
             original: '',
-            playwrights: new ReferenceCollection(),
-            speakers: new ReferenceCollection()
+            speakers: new ReferenceCollection(),
+            playwrights: new ReferenceCollection()
          };
       },
 
