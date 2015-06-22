@@ -9,27 +9,14 @@ define(function (require) {
       className: 'extract'
    });
 
-   var ResultsView = Marionette.CompositeView.extend({
-      childView: ResultView,
-      childViewContainer: '> .extract-list',
-      template: _.partial(nunjucks.render, 'search/extract_result_list.html'),
-      events: {
-         'click button.show-normalized': function () {
-            this.$('button.show-normalized').addClass('active');
-            this.$('button.show-original').removeClass('active');
-            this.$('> .extract-list')
-               .addClass('show-normalized')
-               .removeClass('show-original');
-         },
+   var NoResultsView = Marionette.ItemView.extend({
+      template: _.constant('No Results Found'),
+      className: 'alert alert-info'
+   });
 
-         'click button.show-original': function () {
-            this.$('button.show-original').addClass('active');
-            this.$('button.show-normalized').removeClass('active');
-            this.$('.extract-list')
-               .addClass('show-original')
-               .removeClass('show-normalized');
-         }
-      }
+   var ResultsView = Marionette.CollectionView.extend({
+      childView: ResultView,
+      emptyView: NoResultsView
    });
 
    return ResultsView;
