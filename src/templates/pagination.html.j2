@@ -4,85 +4,82 @@
       max     : int - the index of the last page of items
       padding : int - the number of page links to display to the left and right of the current index
 #}
-<nav class="pagination">
-   <ul class="pagination">
-      {% if current == 1 %}
-         <li class="disabled">
-            <span aria-label="First">
-               <i class="fa fa-angle-double-left"></i>
-            </span>
-         </li>
-         <li class="disabled">
-            <span aria-label="Previous">
-               <i class="fa fa-angle-left"></i>
-            </span>
-         </li>
-      {% else %}
-         <li>
-            <a href="#" aria-label="First">
-               <i class="fa fa-angle-double-left"></i>
-            </a>
-         </li>
-         <li>
-            <a href="#" aria-label="Previous">
-               <i class="fa fa-angle-left"></i>
-            </a>
-         </li>
-      {% endif %}
 
-      {% if max <= 2*padding + 1 %}
-         {# range too small to use all of padding #}
-         {% set lo = 1 %}
-         {% set hi = max %}
-      {% elif current <= padding + 1 %}
-         {# up against left boundary #}
-         {% set lo = 1 %}
-         {% set hi = 2*padding + 1 %}
-      {% elif current + padding >= max %}
-         {# up against right boundary #}
-         {% set lo = max - 2*padding %}
-         {% set hi = max %}
-      {% else %}
-         {# plenty of room on either side of current #}
-         {% set lo = current - padding %}
-         {% set hi = current + padding %}
-      {% endif %}
+{% if current == 1 %}
+   <li class="disabled">
+      <span aria-label="First">
+         <i class="fa fa-angle-double-left"></i>
+      </span>
+   </li>
+   <li class="disabled">
+      <span aria-label="Previous">
+         <i class="fa fa-angle-left"></i>
+      </span>
+   </li>
+{% else %}
+   <li>
+      <a class="goto" href="#" aria-label="First" data-page="1">
+         <i class="fa fa-angle-double-left"></i>
+      </a>
+   </li>
+   <li>
+      <a class="goto" href="#" aria-label="Previous" data-page="{{ current - 1 }}">
+         <i class="fa fa-angle-left"></i>
+      </a>
+   </li>
+{% endif %}
+
+{% if max <= 2*padding + 1 %}
+   {# range too small to use all of padding #}
+   {% set lo = 1 %}
+   {% set hi = max %}
+{% elif current <= padding + 1 %}
+   {# up against left boundary #}
+   {% set lo = 1 %}
+   {% set hi = 2*padding + 1 %}
+{% elif current + padding >= max %}
+   {# up against right boundary #}
+   {% set lo = max - 2*padding %}
+   {% set hi = max %}
+{% else %}
+   {# plenty of room on either side of current #}
+   {% set lo = current - padding %}
+   {% set hi = current + padding %}
+{% endif %}
 
 
-      {% for i in range(lo, hi+1) %}
-         {% if i == current %}
-            <li class="active">
-               <span>{{ i }} <span class="sr-only">(current)</span></span>
-            </li>
-         {% else %}
-            <li>
-               <a href="#">{{ i }}</a>
-            </li>
-         {% endif %}
-      {% endfor %}
+{% for i in range(lo, hi+1) %}
+   {% if i == current %}
+      <li class="active">
+         <span>{{ i }} <span class="sr-only">(current)</span></span>
+      </li>
+   {% else %}
+      <li>
+         <a class="goto" href="#" data-page="{{ i }}">{{ i }}</a>
+      </li>
+   {% endif %}
+{% endfor %}
 
-      {% if current == max %}
-         <li class="disabled">
-            <span aria-label="Next">
-               <i class="fa fa-angle-right"></i>
-            </span>
-         </li>
-         <li class="disabled">
-            <span aria-label="Last">
-               <i class="fa fa-angle-double-right"></i>
-            </span>
-         </li>
-      {% else %}
-         <li>
-            <a href="#" aria-label="Next">
-               <i class="fa fa-angle-right"></i>
-            </a>
-         </li>
-         <li>
-            <a href="#" aria-label="Last">
-               <i class="fa fa-angle-double-right"></i>
-            </a>
-         </li>
-      {% endif %}
-   </ul>
-</nav>
+{% if current == max %}
+   <li class="disabled">
+      <span aria-label="Next">
+         <i class="fa fa-angle-right"></i>
+      </span>
+   </li>
+   <li class="disabled">
+      <span aria-label="Last">
+         <i class="fa fa-angle-double-right"></i>
+      </span>
+   </li>
+{% else %}
+   <li>
+      <a class="goto" href="#" aria-label="Next" data-page="{{ current + 1 }}">
+         <i class="fa fa-angle-right"></i>
+      </a>
+   </li>
+   <li>
+      <a class="goto" href="#" aria-label="Last" data-page="{{ max }}">
+         <i class="fa fa-angle-double-right"></i>
+      </a>
+   </li>
+{% endif %}
