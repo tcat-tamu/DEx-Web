@@ -4,6 +4,8 @@ define(function (require) {
    var RestClient = require('rest_client');
 
    var ExtractProxyCollection = require('./entities/extract_proxy').ExtractProxyCollection;
+   var FacetFieldCollection = require('./entities/facets').FacetFieldCollection;
+
 
    function ExtractRepository(options) {
       var opts = _.defaults(options || {}, {});
@@ -26,13 +28,13 @@ define(function (require) {
          });
 
          var queryParams = {
-            q: query,
-            shelfmark: opts.shelfmark,
-            playwright: opts.playwright,
-            play: opts.play,
-            speaker: opts.character,
-            page: page || 1,
-            numResults: resultsPerPage || 20
+            a: query,
+            ms: opts.shelfmark,
+            pw: opts.playwright,
+            pl: opts.play,
+            sp: opts.character,
+            p: page || 1,
+            n: resultsPerPage || 20
          };
 
          var repo = this;
@@ -42,6 +44,13 @@ define(function (require) {
                currentPage: page,
                numPages: Math.ceil(response.numFound / response.numResultsPerPage),
                results: new ExtractProxyCollection(response.results),
+
+               facets: new FacetFieldCollection(_.map(response.facets, function (items, field) {
+                  return {
+                     field: field,
+                     items: items
+                  };
+               }), { parse: true }),
 
                getPage: function (p) {
                   return repo.search(query, filters, p, response.numResultsPerPage);

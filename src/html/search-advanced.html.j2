@@ -15,34 +15,37 @@
 {% block content %}
    <main class="container">
       <div class="row">
-         <form id="advancedSearch"class="col-md-4">
-            <div class="form-group">
-               <label class="control-label sr-only" for="shelfmark">Shelfmark</label>
-               <input type="search" id="shelfmark" placeholder="Shelfmark" name="shelfmark" class="form-control">
-            </div>
-            <div class="form-group">
-               <label class="control-label sr-only" for="playwright">Playwright</label>
-               <input type="search" id="playwright" placeholder="Playwright" name="playwright" class="form-control">
-            </div>
-            <div class="form-group">
-               <label class="control-label sr-only" for="play">Play</label>
-               <input type="search" id="play" placeholder="Play" name="play" class="form-control">
-            </div>
-            <div class="form-group">
-               <label class="control-label sr-only" for="character">Character</label>
-               <input type="search" id="character" placeholder="Character" name="character" class="form-control">
-            </div>
-            <div class="form-group">
-               <label class="control-label sr-only" for="keyword">Keyword</label>
-               <input type="search" id="keyword" placeholder="Keyword" name="keyword" class="form-control">
-            </div>
-            <div class="btn-row">
-               <button type="submit" class="btn btn-primary">
-                  <i class="glyphicon glyphicon-search"></i>
-                  <span>Search</span>
-               </button>
-            </div>
-         </form>
+         <div class="col-md-4">
+            <form id="advancedSearch">
+               <div class="form-group">
+                  <label class="control-label sr-only" for="shelfmark">Shelfmark</label>
+                  <input type="search" id="shelfmark" placeholder="Shelfmark" name="shelfmark" class="form-control">
+               </div>
+               <div class="form-group">
+                  <label class="control-label sr-only" for="playwright">Playwright</label>
+                  <input type="search" id="playwright" placeholder="Playwright" name="playwright" class="form-control">
+               </div>
+               <div class="form-group">
+                  <label class="control-label sr-only" for="play">Play</label>
+                  <input type="search" id="play" placeholder="Play" name="play" class="form-control">
+               </div>
+               <div class="form-group">
+                  <label class="control-label sr-only" for="character">Character</label>
+                  <input type="search" id="character" placeholder="Character" name="character" class="form-control">
+               </div>
+               <div class="form-group">
+                  <label class="control-label sr-only" for="keyword">Keyword</label>
+                  <input type="search" id="keyword" placeholder="Keyword" name="keyword" class="form-control">
+               </div>
+               <div class="btn-row">
+                  <button type="submit" class="btn btn-primary">
+                     <i class="glyphicon glyphicon-search"></i>
+                     <span>Search</span>
+                  </button>
+               </div>
+            </form>
+            <div id="facets"></div>
+         </div>
          <div class="col-md-8" id="main"></div>
       </div>
    </main>
