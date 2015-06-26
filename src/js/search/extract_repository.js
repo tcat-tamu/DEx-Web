@@ -37,6 +37,10 @@ define(function (require) {
             character: []
          });
 
+         if (opts.query == null) {
+            throw new TypeError('query option is required');
+         }
+
          var queryParams = {
             a: query,
             ms: opts.shelfmark,

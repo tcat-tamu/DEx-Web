@@ -63,9 +63,7 @@ define(function (require) {
       className: 'facet-group sort-count-desc',
 
       templateHelpers: function () {
-         return {
-            title: this.title
-         };
+         return _.pick(this, 'title');
       },
 
       regions: {

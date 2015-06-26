@@ -35,7 +35,7 @@ define(function (require) {
             padding: 4
          });
 
-         if (!opts.total) {
+         if (!_.isNumber(opts.total)) {
             throw new TypeError('no total number of pages provided');
          }
 

@@ -17,12 +17,17 @@ define(function (require) {
    var FacetField = Backbone.Model.extend({
       defaults: function () {
          return {
+            field: '',
             label: '',
             items: new FacetItemCollection()
          };
       },
 
       initialize: function (attrs) {
+         if (!attrs.field) {
+            throw new TypeError('no [field] attribute provided');
+         }
+
          this.listenTo(this.get('items'), 'change:selected', function (item) {
             this.trigger('change:items:selected', this, item);
          });
