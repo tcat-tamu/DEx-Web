@@ -20,6 +20,8 @@ define(function (require) {
    _.extend(ExtractRepository.prototype, {
 
       search: function (options) {
+         options = options || '';
+
          // basic query alternate usage
          if (_.isString(options)) {
             options = {
@@ -29,6 +31,7 @@ define(function (require) {
          }
 
          var opts = _.defaults(_.clone(options || {}), {
+            query: '',
             shelfmark: '',
             playwright: '',
             play: '',
@@ -45,10 +48,6 @@ define(function (require) {
             play: [],
             character: []
          });
-
-         if (opts.query == null) {
-            throw new TypeError('query option is required');
-         }
 
          var queryParams = {
             ms: opts.shelfmark,

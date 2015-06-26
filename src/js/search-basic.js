@@ -61,4 +61,7 @@ define(function (require) {
 
       repo.search($('input#search').val()).then(showResults);
    });
+
+   // populate form with default "query-all"
+   repo.search().then(showResults);
 });
