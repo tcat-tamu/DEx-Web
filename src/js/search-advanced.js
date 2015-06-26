@@ -41,8 +41,13 @@ define(function (require) {
          searchResponse.getPage(page).then(showResults);
       });
 
+      searchResponse.facets.on('change:items:selected', function () {
+         searchResponse.facet(searchResponse.facets.getSelected()).then(showResults);
+      });
+
       layout.getRegion('results').show(resultsView);
       layout.getRegion('pagination').show(paginatorView);
+
 
       var facetsView = new FacetsView({
          collection: searchResponse.facets
@@ -54,9 +59,8 @@ define(function (require) {
    $('#advancedSearch').on('submit', function (evt) {
       evt.preventDefault();
 
-      var query = $('input#keyword').val();
-
-      repo.search(query, {
+      repo.search({
+         query: $('input#keyword').val(),
          shelfmark: $('input#shelfmark').val(),
          playwright: $('input#playwright').val(),
          play: $('input#play').val(),
