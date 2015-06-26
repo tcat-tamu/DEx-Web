@@ -71,7 +71,7 @@ define(function (require) {
       },
 
       initialize: function (options) {
-         var opts = _.defaults(options || {}, {
+         var opts = _.defaults(_.clone(options || {}), {
             title: ''
          });
 

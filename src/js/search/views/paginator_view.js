@@ -30,7 +30,7 @@ define(function (require) {
       },
 
       initialize: function (options) {
-         var opts = _.defaults(options || {}, {
+         var opts = _.defaults(_.clone(options || {}), {
             current: 1,
             padding: 4
          });
@@ -39,7 +39,7 @@ define(function (require) {
             throw new TypeError('no total number of pages provided');
          }
 
-         _.extend(this, _.pick(opts, 'current', 'total', 'padding'));
+         this.mergeOptions(opts, ['current', 'total', 'padding']);
       }
 
    });

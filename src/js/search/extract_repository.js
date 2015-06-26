@@ -20,17 +20,17 @@ define(function (require) {
    _.extend(ExtractRepository.prototype, {
 
       search: function (options) {
-         var opts = _.defaults(options || {}, {
+         var opts = _.defaults(_.clone(options || {}), {
             shelfmark: '',
             playwright: '',
             play: '',
             character: '',
-            facets: {},
+            facets: null, // defaults set later
             page: 1,
             resultsPerPage: 20,
          });
 
-         opts.facets = _.defaults(opts.facets || {}, {
+         opts.facets = _.defaults(_.clone(opts.facets || {}), {
             manuscript: [],
             playwright: [],
             play: [],
@@ -71,11 +71,11 @@ define(function (require) {
                }), { parse: true }),
 
                getPage: function (p) {
-                  return repo.search(_.extend({}, opts, { page: p }));
+                  return repo.search(_.extend(_.clone(opts), { page: p }));
                },
 
                facet: function (facets) {
-                  return repo.search(_.extend({}, opts, { page: 1, facets: facets }));
+                  return repo.search(_.extend(_.clone(opts), { page: 1, facets: facets }));
                }
             };
          });
