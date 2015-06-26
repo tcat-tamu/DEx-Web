@@ -2,6 +2,7 @@ define(function (require) {
 
    var Marionette = require('marionette');
    var $ = require('jquery');
+   var _ = require('underscore');
 
    var LayoutView = require('./search/views/layout_view');
    var ResultsView = require('./search/views/results_view');
@@ -63,5 +64,11 @@ define(function (require) {
    });
 
    // populate form with default "query-all"
-   repo.search().then(showResults);
+   repo.search().then(showResults).catch(function (err) {
+      console.error(err);
+      layout.getRegion('results').show(new Marionette.ItemView({
+         className: 'alert alert-danger',
+         template: _.constant(err || 'An unknown error occurred.')
+      }));
+   });
 });

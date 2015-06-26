@@ -91,6 +91,8 @@ define(function (require) {
                   return repo.search(_.extend(_.clone(opts), { page: 1, facets: facets }));
                }
             };
+         }).catch(function (err) {
+            throw new Error('Unable to fetch results from server: ' + err.error);
          });
       }
 
