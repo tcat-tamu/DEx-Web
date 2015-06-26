@@ -20,6 +20,14 @@ define(function (require) {
    _.extend(ExtractRepository.prototype, {
 
       search: function (options) {
+         // basic query alternate usage
+         if (_.isString(options)) {
+            options = {
+               basic: true,
+               query: options
+            };
+         }
+
          var opts = _.defaults(_.clone(options || {}), {
             shelfmark: '',
             playwright: '',
@@ -28,6 +36,7 @@ define(function (require) {
             facets: null, // defaults set later
             page: 1,
             resultsPerPage: 20,
+            basic: false
          });
 
          opts.facets = _.defaults(_.clone(opts.facets || {}), {
@@ -42,7 +51,6 @@ define(function (require) {
          }
 
          var queryParams = {
-            a: query,
             ms: opts.shelfmark,
             'f.ms': opts.facets.manuscript,
             pw: opts.playwright,
@@ -54,6 +62,12 @@ define(function (require) {
             p: opts.page,
             n: opts.resultsPerPage
          };
+
+         if (opts.basic) {
+            queryParams.q = opts.query;
+         } else {
+            queryParams.a = opts.query;
+         }
 
          var repo = this;
 
