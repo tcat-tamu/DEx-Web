@@ -1,7 +1,8 @@
+{#
 {% macro item(title, field, item) %}
    <li class="checkbox">
       <label>
-         <input type="checkbox" name="{{ field }}" value="{{ item.id }}" />
+         <input type="checkbox" name="{{ field }}" value="{{ item.label }}"{% if item.selected %} checked{% endif %} />
          {{ item.label }}
          <a href="#{{ field }}={{ item.label }}" title="open in {{ title | lower }} browser">
             <i class="fa fa-external-link-square"></i>
@@ -11,6 +12,7 @@
       </label>
    </li>
 {% endmacro %}
+#}
 
 <h1 data-toggle="collapse" data-target="#collapse-{{ field }}" aria-expanded="true" aria-controls="collapse-{{ field }}">
    <div class="pull-left">
@@ -38,6 +40,7 @@
    </div>
 </h1>
 <div class="facet-items collapse in" id="collapse-{{ field }}">
+   {#
    <ul>
       {% for i in range(0, 3 if items|length > 3 else items|length) %}
          {{ item(title|default(field), field, items[i]) }}
@@ -54,4 +57,5 @@
          <span class="show-fewer">Show Fewer</span>
       </a>
    {% endif %}
+   #}
 </div>

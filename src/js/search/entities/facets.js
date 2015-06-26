@@ -1,12 +1,14 @@
 define(function (require) {
 
    var Backbone = require('backbone');
+   var _ = require('underscore');
 
 
    var FacetItem = Backbone.Model.extend({
       defaults: {
          label: '',
-         count: 0
+         count: 0,
+         selected: false
       }
    });
 
@@ -18,6 +20,12 @@ define(function (require) {
             label: '',
             items: new FacetItemCollection()
          };
+      },
+
+      initialize: function (attrs) {
+         this.listenTo(this.get('items'), 'change:selected', function (item) {
+            this.trigger('change:items:selected', this, item);
+         });
       },
 
       parse: function (json) {
@@ -34,6 +42,25 @@ define(function (require) {
          json.items = json.items.toJSON();
 
          return json;
+      },
+
+      getSelected: function () {
+         return this.get('items').where({ selected: true });
+      }
+   });
+
+   var FacetFieldCollection = Backbone.Collection.extend({
+      model: FacetField,
+
+      getSelected: function () {
+         var selected = {};
+         this.each(function (field) {
+            selected[field.get('field')] = _.chain(field.getSelected())
+               .invoke('toJSON')
+               .pluck('label')
+               .value();
+         });
+         return selected;
       }
    });
 
@@ -42,7 +69,7 @@ define(function (require) {
       FacetItem: FacetItem,
       FacetItemCollection: FacetItemCollection,
       FacetField: FacetField,
-      FacetFieldCollection: Backbone.Collection.extend({ model: FacetField })
+      FacetFieldCollection: FacetFieldCollection
    };
 
 });

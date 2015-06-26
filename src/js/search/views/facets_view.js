@@ -6,6 +6,57 @@ define(function (require) {
    // var product = require('cartesian-product');
 
 
+   var FacetItemView = Marionette.ItemView.extend({
+      template: _.partial(nunjucks.render, 'search/facet_item.html'),
+      tagName: 'li',
+      className: 'checkbox',
+
+      templateHelpers: function () {
+         return _.pick(this, 'title', 'field');
+      },
+
+      events: {
+         'click :checkbox': function (evt) {
+            this.model.set('selected', evt.target.checked);
+         }
+      },
+
+      initialize: function (options) {
+         var opts = _.defaults(_.clone(options || {}), {
+            title: ''
+         });
+
+         if (!opts.field) {
+            throw new TypeError('no parent field name specified');
+         }
+
+         this.mergeOptions(opts, ['field', 'title']);
+      }
+   });
+
+
+   var FacetItemsView = Marionette.CollectionView.extend({
+      childView: FacetItemView,
+      tagName: 'ul',
+
+      childViewOptions: function () {
+         return _.pick(this, 'field', 'title');
+      },
+
+      initialize: function (options) {
+         var opts = _.defaults(_.clone(options || {}), {
+            title: ''
+         });
+
+         if (!opts.field) {
+            throw new TypeError('no parent field specified');
+         }
+
+         this.mergeOptions(opts, ['field', 'title']);
+      }
+   });
+
+
    var FacetView = Marionette.LayoutView.extend({
       template: _.partial(nunjucks.render, 'search/facet_group.html'),
       tagName: 'section',
@@ -17,12 +68,24 @@ define(function (require) {
          };
       },
 
+      regions: {
+         items: '> .facet-items'
+      },
+
       initialize: function (options) {
          var opts = _.defaults(options || {}, {
             title: ''
          });
 
          this.mergeOptions(opts, ['title']);
+      },
+
+      onShow: function () {
+         this.getRegion('items').show(new FacetItemsView({
+            title: this.title,
+            field: this.model.get('field'),
+            collection: this.model.get('items')
+         }));
       }
    });
 
