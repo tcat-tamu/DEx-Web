@@ -13,34 +13,14 @@
 {% endblock %}
 
 {% block content %}
-   <main class="container">
-      <div class="row">
-         <div class="col-md-4">
-            <form id="basicSearch">
-               <div class="form-group">
-                  <label class="control-label sr-only" for="search">Search</label>
-                  <div class="input-group">
-                     <input type="search" id="search" placeholder="Search" name="search" class="form-control">
-                     <span class="input-group-btn">
-                        <button type="reset" class="btn btn-default">
-                           <i class="glyphicon glyphicon-remove"></i>
-                           <span class="sr-only">Clear search</span>
-                        <button type="submit" class="btn btn-primary">
-                           <i class="glyphicon glyphicon-search"></i>
-                           <span class="sr-only">Search</span>
-                        </button>
-                     </span>
-                  </div>
-               </div>
-            </form>
-            <div id="facets"></div>
-         </div>
-         <div class="col-md-8" id="main"></div>
-      </div>
-   </main>
+   <main class="container"></main>
 {% endblock %}
 
 {% block javascripts %}
    {{ super() }}
-   <script>require('search-basic');</script>
+   <script>
+      require(['search-basic', 'config'], function (app, config) {
+         app.initialize('main.container', config);
+      });
+   </script>
 {% endblock %}

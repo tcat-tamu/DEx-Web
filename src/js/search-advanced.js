@@ -1,70 +1,57 @@
 define(function (require) {
 
    var Marionette = require('marionette');
-   var $ = require('jquery');
+   var _ = require('underscore');
 
    var LayoutView = require('./search/views/layout_view');
-   var ResultsView = require('./search/views/results_view');
-   var PaginatorView = require('./search/views/paginator_view');
-   var FacetsView = require('./search/views/facets_view');
-   // var ResultTypes = require('./search/entities/extract_proxy');
+   var SearchController = require('./search/search_controller');
+   var AdvancedFormView = require('./search/views/advanced_form_view');
 
    var ExtractRepository = require('./search/extract_repository');
 
 
-   var repo = new ExtractRepository({
-      apiEndpoint: '/api/dex/extracts'
-   });
-
-   var facetRegion = new Marionette.Region({
-      el: '#facets'
-   });
-
-   var layout = new LayoutView({
-      el: '#main'
-   });
-
-   layout.render();
-
-   function showResults(searchResponse) {
-      var resultsView = new ResultsView({
-         collection: searchResponse.results
+   function initialize(el, config) {
+      var repo = new ExtractRepository({
+         apiEndpoint: config.apiEndpoint
       });
 
-      var paginatorView = new PaginatorView({
-         current: searchResponse.currentPage,
-         total: searchResponse.numPages,
-         padding: 3
+      var layout = new LayoutView({
+         el: el
       });
 
-      paginatorView.on('page', function (page) {
-         searchResponse.getPage(page).then(showResults);
+      layout.render();
+
+      var controller = new SearchController({
+         layout: layout
       });
 
-      searchResponse.facets.on('change:items:selected', function () {
-         searchResponse.facet(searchResponse.facets.getSelected()).then(showResults);
+
+      var formView = new AdvancedFormView();
+
+      formView.on('search', function (params) {
+         repo.search(params)
+            .then(function (results) {
+               controller.showResults(results);
+            })
+            .catch(function (err) {
+               console.error(err);
+               layout.getRegion('results').show(new Marionette.ItemView({
+                  className: 'alert alert-danger',
+                  template: _.constant(err || 'An unknown error occurred.')
+               }));
+            });
       });
 
-      layout.getRegion('results').show(resultsView);
-      layout.getRegion('pagination').show(paginatorView);
-
-
-      var facetsView = new FacetsView({
-         collection: searchResponse.facets
+      formView.on('clear', function () {
+         controller.clearResults();
       });
 
-      facetRegion.show(facetsView);
+      layout.getRegion('form').show(formView);
    }
 
-   $('#advancedSearch').on('submit', function (evt) {
-      evt.preventDefault();
 
-      repo.search({
-         query: $('input#keyword').val(),
-         shelfmark: $('input#shelfmark').val(),
-         playwright: $('input#playwright').val(),
-         play: $('input#play').val(),
-         character: $('input#character').val()
-      }).then(showResults);
-   });
+   return {
+      initialize: initialize
+   };
+
 });
