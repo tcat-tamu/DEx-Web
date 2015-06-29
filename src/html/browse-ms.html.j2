@@ -1,125 +1,24 @@
 {% extends 'layout.html.j2' %}
 
-{% import '_facet_group.html.j2' as facet %}
-{% import '_pagination.html.j2' as pagination %}
-
 {% block title %}Manuscripts Browser - {{ super() }}{% endblock %}
 
 {% block header %}
    <header>
       <div class="container">
-         <h1>Manuscripts Browser</h1>
+         <h1 id="page-title">Browse by Manuscript</h1>
       </div>
    </header>
 {% endblock %}
 
-{% set manuscripts = [
-    {
-        "author": "unknown compiler",
-        "file": "BLMSLansdowne1185",
-        "title": "BL Lansdowne 1185"
-    },
-    {
-        "author": null,
-        "file": "Harvard MS Fr. 487",
-        "title": "Harvard MS Fr. 487"
-    },
-    {
-        "author": null,
-        "file": "BLMSAdd64078",
-        "title": "British Library Additional MS 64078"
-    },
-    {
-        "author": "Abraham Wright",
-        "file": "DEx_Sample_BLAddMS22608",
-        "title": "British Library Additional MS 22608"
-    },
-    {
-        "author": "unknown compiler",
-        "file": "FolgerMSVa87_22Apr",
-        "title": " of honour"
-    },
-    {
-        "author": null,
-        "file": "UChicago_MS824",
-        "title": "University of Chicago MS 824"
-    },
-    {
-        "author": "William Sancroft",
-        "file": "BodleianMSSancroft29",
-        "title": "Archbishop"
-    },
-    {
-        "author": "Margaret Bellasys",
-        "file": "BLMSAdd10309",
-        "title": "British Library Additional Manuscript 10309"
-    }
-]
-%}
-
 {% block content %}
-   <div class="container">
-      <div class="row">
-         <div class="col-md-3">
-            <form style="margin-top:3em;">
-               <div class="input-group">
-                  <input type="search" class="form-control" placeholder- "Search for ...">
-                  <span class="input-group-btn">
-                     <button type="submit" class="btn btn-primary" type="button">Go</button>
-               </div>
-               <div class="facet-controls">
-                  {{ facet.group('Playwrights', 'playwrights', [
-                     { 'id': 'BLMSAdd10309', 'title': 'Anonymous', 'count': 432 },
-                     { 'id': 'Cartwright', 'title': 'William Cartwright', 'count': 302 },
-                     { 'id': 'Shakespeare', 'title': 'William Shakespeare', 'count': 243 },
-                     { 'id': 'Massinger', 'title': 'Philip Massinger', 'count': 178 },
-                     { 'id': 'Webster', 'title': 'John Webster', 'count': 124 },
-                     { 'id': 'Jonson', 'title': 'Ben Johnson', 'count': 67 },
-                     { 'id': 'Beaumont', 'title': 'Francis Beaumont', 'count': 22 }
-                  ]) }}
-
-                  {{ facet.group('Plays', 'plays', [
-                     { 'id': 'Anon_TragNero', 'title': 'The Tragedy of Nero (Anonymous)', 'count': 32 },
-                     { 'id': 'BeaumontFletcher_Scornful', 'title': 'The Scornful Lady (Beaumont and Fletcher)', 'count': 302 },
-                     { 'id': 'Cartwright_Slave', 'title': 'The Royal Slave (Cartwright)', 'count': 243 },
-                     { 'id': 'Jonson_Fortunate', 'title': 'The Fortunate Isles, and their Union (Jonson)', 'count': 178 },
-                     { 'id': 'Massinger_Maid', 'title': 'The Maid of Honour (Massinger)', 'count': 124 },
-                     { 'id': 'Shakes_Henry5', 'title': 'Henry V (Shakespeare)', 'count': 67 },
-                     { 'id': 'Webster_Duchess', 'title': 'The Duchess of Malfi (Webster)', 'count': 22 }
-                  ]) }}
-
-                  {{ facet.group('Speakers', 'speaker', [
-                     { 'id': 'Bourbon', 'title': 'Bourbon (Henry V)', 'count': 32 },
-                     { 'id': 'Bertoldo', 'title': 'Bertoldo (The Maid of Honour)', 'count': 302 },
-                     { 'id': 'Portunus', 'title': 'Portunus (The Fortunate Isles, and their Union)', 'count': 243 },
-                     { 'id': 'Sceuinus', 'title': 'Sceuinus (The Tragedy of Nero)', 'count': 178 },
-                     { 'id': 'Flavius', 'title': 'Flavius (The Tragedy of Nero)', 'count': 124 },
-                     { 'id': 'Prologue_RoyalSlave', 'title': 'Prologue (The Royal Slave)', 'count': 67 }
-                  ]) }}
-               </div>
-            </form>
-
-         </div>
-
-
-         <main class="col-md-9">
-            <header class="page-header">
-               <h1>Available Manuscripts</h1>
-            </header>
-
-            <nav>
-               <ul class="manuscripts">
-                  {% for manuscript in manuscripts %}
-                     <li><a href="{{ baseUrl }}/browse-ms-blmsadd10309.html">{{ manuscript.title }} ({{ manuscript.file }})</a></li>
-                  {% endfor %}
-               </ul>
-            </nav>
-         </main>
-      </div>
-   </div>
+   <main class="container"></main>
 {% endblock %}
 
 {% block javascripts %}
    {{ super() }}
-   <script>require('browse');</script>
+   <script>
+      require(['browse', 'config'], function (app, config) {
+         app.initialize('main.container', config);
+      });
+   </script>
 {% endblock %}
