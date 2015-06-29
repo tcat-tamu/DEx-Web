@@ -12,7 +12,7 @@ define(function (require) {
 
    function initialize(el, config) {
       var repo = new ExtractRepository({
-         apiEndpoint: config.apiEndpoint
+         apiEndpoint: config.apiEndpoint + '/extracts'
       });
 
       var layout = new LayoutView({
