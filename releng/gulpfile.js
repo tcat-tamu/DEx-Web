@@ -72,6 +72,7 @@ gulp.task('javascripts', function () {
          paths: {
             'backbone': vendorPath + '/backbone/backbone',
             'backbone.babysitter': vendorPath + '/backbone.babysitter/lib/backbone.babysitter',
+            'backbone.radio': vendorPath + '/backbone.radio/build/backbone.radio',
             'backbone.wreqr': vendorPath + '/backbone.wreqr/lib/backbone.wreqr',
             'bootstrap': vendorPath + '/bootstrap/dist/js/bootstrap',
             'freewall': vendorPath + '/freewall/freewall',
@@ -126,8 +127,7 @@ gulp.task('html', function () {
          srcPath + '/html/bibliography.html.j2',
          srcPath + '/html/browse.html.j2',
          srcPath + '/html/browse-character.html.j2',
-         srcPath + '/html/browse-ms.html.j2',
-         srcPath + '/html/browse-ms-blmsadd10309.html.j2',
+         srcPath + '/html/browse-manuscript.html.j2',
          srcPath + '/html/browse-play.html.j2',
          srcPath + '/html/browse-playwright.html.j2',
          srcPath + '/html/search-advanced.html.j2'

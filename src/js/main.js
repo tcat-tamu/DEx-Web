@@ -1,1 +1,1 @@
-define('main', ['bootstrap', 'about', 'browse', 'search-advanced', 'search-basic'], {});
+define('main', ['bootstrap', 'about', 'browse_manuscript', 'search_advanced', 'search_basic'], {});

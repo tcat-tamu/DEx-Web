@@ -3,7 +3,7 @@ define(function (require) {
    var Marionette = require('marionette');
    var nunjucks = require('nunjucks');
    var _ = require('underscore');
-   // var product = require('cartesian-product');
+   // var product = require('cartesian_product');
 
 
    var FacetItemView = Marionette.ItemView.extend({

@@ -19,7 +19,7 @@
 {% block javascripts %}
    {{ super() }}
    <script>
-      require(['search-basic', 'config'], function (app, config) {
+      require(['search_basic', 'config'], function (app, config) {
          app.initialize('main.container', config);
       });
    </script>

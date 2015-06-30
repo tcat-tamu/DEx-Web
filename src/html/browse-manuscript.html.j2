@@ -17,7 +17,7 @@
 {% block javascripts %}
    {{ super() }}
    <script>
-      require(['browse', 'config'], function (app, config) {
+      require(['browse_manuscript', 'config'], function (app, config) {
          app.initialize('main.container', config);
       });
    </script>
