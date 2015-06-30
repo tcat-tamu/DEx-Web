@@ -20,6 +20,7 @@
       <i class="glyphicon glyphicon-chevron-down"></i>
    </div>
    {{ title|default(field) }}
+   {#
    <div class="pull-right btn-group">
       <a class="btn btn-xs btn-default icon-sort icon-sort-alpha icon-sort-alpha-asc" title="sort alphabetically">
          <i class="fa fa-sort-alpha-asc"></i>
@@ -38,6 +39,7 @@
          <span class="sr-only">sort by count (high to low)</span>
       </a>
    </div>
+   #}
 </h1>
 <div class="facet-items collapse in" id="collapse-{{ field }}">
    {#
