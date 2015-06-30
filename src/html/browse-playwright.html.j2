@@ -1,189 +1,24 @@
 {% extends 'layout.html.j2' %}
 
-{% import '_facet_group.html.j2' as facet %}
-{% import '_pagination.html.j2' as pagination %}
-
-{% block title %}William Shakespeare - Playwrights Browser - {{ super() }}{% endblock %}
+{% block title %}Playwrights Browser - {{ super() }}{% endblock %}
 
 {% block header %}
    <header>
       <div class="container">
-         <h1>William Shakespeare</h1>
+         <h1 id="page-title">Browse by Playwright</h1>
       </div>
    </header>
 {% endblock %}
 
 {% block content %}
-   <div class="container">
-      <div class="row">
-         <div class="col-md-3">
-            <form style="margin-top:3em;">
-               <div class="input-group">
-                  <input type="search" class="form-control" placeholder- "Search for ...">
-                  <span class="input-group-btn">
-                     <button type="submit" class="btn btn-primary" type="button">Go</button>
-               </div>
-               <div class="facet-controls">
-                  {{ facet.group('Manuscripts', 'ms', [
-                     { 'id': 'BLMSAdd10309', 'title': 'British Library Additional Manuscript 10309', 'count': 32 },
-                     { 'id': 'BLMSAdd64078', 'title': 'British Library Additional MS 64078', 'count': 302 },
-                     { 'id': 'BLMSLansdowne1185', 'title': 'BL Lansdowne 1185', 'count': 243 },
-                     { 'id': 'BodleianMSSancroft29', 'title': 'Bodleian MS Sancroft 29', 'count': 178 },
-                     { 'id': 'FolgerMSVa87', 'title': 'Folger MS V.a.87', 'count': 124 },
-                     { 'id': 'HarvardMSFr487', 'title': 'Harvard MS Fr. 487', 'count': 67 },
-                     { 'id': 'UChicago_MS824', 'title': 'University of Chicago MS 824', 'count': 22 }
-                  ]) }}
-
-                  {{ facet.group('Plays', 'plays', [
-                     { 'id': 'Anon_TragNero', 'title': 'The Tragedy of Nero (Anonymous)', 'count': 32 },
-                     { 'id': 'BeaumontFletcher_Scornful', 'title': 'The Scornful Lady (Beaumont and Fletcher)', 'count': 302 },
-                     { 'id': 'Cartwright_Slave', 'title': 'The Royal Slave (Cartwright)', 'count': 243 },
-                     { 'id': 'Jonson_Fortunate', 'title': 'The Fortunate Isles, and their Union (Jonson)', 'count': 178 },
-                     { 'id': 'Massinger_Maid', 'title': 'The Maid of Honour (Massinger)', 'count': 124 },
-                     { 'id': 'Shakes_Henry5', 'title': 'Henry V (Shakespeare)', 'count': 67 },
-                     { 'id': 'Webster_Duchess', 'title': 'The Duchess of Malfi (Webster)', 'count': 22 }
-                  ]) }}
-
-                  {{ facet.group('Speakers', 'speaker', [
-                     { 'id': 'Bourbon', 'title': 'Bourbon (Henry V)', 'count': 32 },
-                     { 'id': 'Bertoldo', 'title': 'Bertoldo (The Maid of Honour)', 'count': 302 },
-                     { 'id': 'Portunus', 'title': 'Portunus (The Fortunate Isles, and their Union)', 'count': 243 },
-                     { 'id': 'Sceuinus', 'title': 'Sceuinus (The Tragedy of Nero)', 'count': 178 },
-                     { 'id': 'Flavius', 'title': 'Flavius (The Tragedy of Nero)', 'count': 124 },
-                     { 'id': 'Prologue_RoyalSlave', 'title': 'Prologue (The Royal Slave)', 'count': 67 }
-                  ]) }}
-               </div>
-            </form>
-
-         </div>
-         <div class="col-md-9" class="extracts">
-            <div class="page-header toolbar">
-               <div class="btn-group pull-right" role="group" aria-label="manuscript display text">
-                  <button type="button" id="showNormalized" class="btn btn-default active">Normalized</button>
-                  <button type="button" id="showOriginal" class="btn btn-default">Original</button>
-               </div>
-               <div class="pull-right">{{ pagination.pagination(10, 2, 3) }}</div>
-               <h2>Extracts</h2>
-            </div>
-
-            <div id="extractList" class="extract-list show-normalized">
-               <div class="extract">
-                  <div class="original">
-                     <blockquote>
-                        <p>I keepemy horse, I keepe my whore, <br>I havenowealth, yet I’me poore. <br>I travellall theworld about, <br>And yet was borne to ne’re a foot. <br>w<sup>th</sup> partridge plump, &amp; woodcocke fine, <br>At midnight oft I use to dine. <br>And when my whore is out of case, <br>My hostesse daughter takes her place. <br>The maids sit up, &amp; watch their turnes, <br>If I stay late the tapster mournes. <br>The cooke-maid will not yeild to sin, <br>Though tempted by the Chamberlin <br>And when I knocke, oh!how theyhustle, <br>The Ostler yawns, the Geldings justle. <br>And then I call bring forth my horse, S<sup>r</sup> <br>And aftercomes, deliver your purse, S<sup>r</sup>. </p>
-                     </blockquote>
-                  </div>
-                  <div class="normalized">
-                     <blockquote>
-                        <p>I keepmy horse, I keep my whore, <br>I takenorents, yet  am not   poore . <br>I travelall theland about, <br>And yet was born to ne’re a foot. <br>with partridge plump, with woodcocke fine, <br>I do midnight  often  I use to dine. <br>And if my whore be not in case, <br>My hostess' daughter takes her place. <br>The maids sit up, &amp; watch their turns, <br>If I stay long the tapster mourns. <br>The cook-maid has no mind to sin, <br>Though tempted by the Chamberlin <br> But  when I knock, O howhow theybustle, <br>The Ostler yawns, the Geldings justle. <br>If maid but sleep, O how they curse her! <br>And all thiscomes, deliver your purse, Sir.</p>
-                     </blockquote>
-                  </div>
-
-                  <div class="extract-citation">
-                     <div>
-                        <span>Folger MS V.a.262</span> (
-                        <span>f. 5v</span>)</div>
-                     <div>by
-                        <span>Lady Macbeth</span> in
-                        <span>
-                           <em>Macbeth</em>
-                        </span> (
-                        <span>Shakespeare</span>)</div>
-                  </div>
-               </div>
-
-
-               <div class="extract">
-                  <div class="original">
-                     <span class="label">By Ben Jonson</span>
-                     <blockquote>
-                        <p>Still to be neat, still to be drest, <br>As you were goeing to a feast; <br>Still to be pouder'd, still pfum'd <br>Ladie it is to be presum'd <br>Though arts hid causes are not found <br>All is not sweete, all is not sound.  <br>Give me alooke, give me a face <br>That makessimplicitie a grace: <br>Roabelooselyhanging, hayre as free. <br>Such sweet neglect more taketh me. <br>Thenallthe spurious feats of art <br>Theyplease mine eyes, but not my hart.</p>
-                     </blockquote>
-                  </div>
-                  <div class="normalized">
-                     <span class="label">By Ben Jonson</span>
-                     <blockquote>
-                        <p>Still to be neat, still to be dressed, <br>As you were going to a feast; <br>Still to be powdered, still perfumed <br> lady  it is to be perfumed <br>Though arts hid causes are not found <br>All is not sweet, all is not sound.  <br>Give me alook, give me a face <br>That makessimplicity a grace: <br>robeslooselyflowing, hair as free. <br>Such sweet neglect more taketh me. <br> than allth'adulteries of art <br>Theystrike mine eyes, but not my heart.</p>
-                     </blockquote>
-                  </div>
-
-                  <div class="extract-citation">
-                     <div>
-                        <span>Folger MS V.a.262</span> (
-                        <span>f. 5v</span>)</div>
-                     <div>by
-                        <span>Lady Macbeth</span> in
-                        <span>
-                           <em>Macbeth</em>
-                        </span> (
-                        <span>Shakespeare</span>)</div>
-                  </div>
-               </div>
-
-
-               <div class="extract">
-                  <div class="original">
-                     <span class="label">By Ben Jonson</span>
-                     <blockquote>
-                        <p>Come Sweet Caelia let us prove <br>While we may y<sup>e</sup> sports of Love <br>Time will not be o<sup>rs</sup> for ever <br>He at length o<sup>r</sup> blisse will sever <br>Spen not then his giftes in vaine <br>Suns that set, may rise againe. <br>But if we once loose this light <br>It's w<sup>th</sup> us perpetuall night <br>Why should we defer o<sup>r</sup> joys <br>Fame, &amp; Rumour, are but toyes. <br>Cannote we delude the eyes? <br>Of a few poore household spyes. <br>And his easier eares beguile, <br>Soe remov'd by many a mile. <br>It's no sinne loves fruits to steale, <br>But the sweet thefts to reveale. <br>To be taken, to be <del>sene</del>seene&gt; <br>These hath crimes accounted beene.</p>
-                     </blockquote>
-                  </div>
-                  <div class="normalized">
-                     <span class="label">By Ben Jonson</span>
-                     <blockquote>
-                        <p>Come my Caelia let us prove <br>While we can the sports of Love <br>Time will not be ours for ever <br>He at length our good will sever <br>spend not then his giftes in vain <br>Suns that set, may rise again. <br>But if once we lose this light <br>'Tis with us perpetual night <br>Why should we defer our joys <br>Fame, &amp; Rumour, are but toys. <br>Cannote we delude the eyes? <br>Of a few poor household spies. <br>Or his easier ears beguile, <br>Thus removèd by our wile. <br>It's no sin loves fruits to steal, <br>But the sweet thefts to reveal. <br>To be taken, to be seene&gt; <br>These have crimes accounted been.</p>
-                     </blockquote>
-                  </div>
-
-                  <div class="extract-citation">
-                     <div>
-                        <span>Folger MS V.a.262</span> (
-                        <span>f. 5v</span>)</div>
-                     <div>by
-                        <span>Lady Macbeth</span> in
-                        <span>
-                           <em>Macbeth</em>
-                        </span> (
-                        <span>Shakespeare</span>)</div>
-                  </div>
-               </div>
-
-
-               <div class="extract">
-                  <div class="original">
-                     <span class="label">Verses before a Masque</span>
-                     <blockquote>
-                        <p>Gentlemen y’are welcome, but not from me, <br>For god’s my judge, doe but let you see <br>Men; whom of late, from out y<sup>e</sup> Northerns sands <br>The sea belcht up, upon our fruitfull lands, <br>They are all males, put yo<sup>u</sup> but females to’um <br>They will not sticke in baudy termes to woo 'um <br>I brought them hither for to make yo<sup>u</sup> sport <br>And when that’s done we’le whip them to y<sup>e</sup> court. <br>They’re skill’d in horne-pipes, Jigs, &amp; country-rounds <br>God save King James, the divell take his hounds.</p>
-                     </blockquote>
-                  </div>
-                  <div class="normalized">
-                     <span class="label">Verses before a Masque</span>
-                     <blockquote>
-                        <p>Gentlemen you are welcome, but not from me, <br>For god’s my judge, do but let you see <br>Men; whom of late, from out the Northerns sands <br>The sea belched up, upon our fruitful lands, <br>They are all males, put yo<sup>u</sup> but females to’um <br>They will not stick in bawdy terms to woo them <br>I brought them hither for to make yo<sup>u</sup> sport <br>And when that’s done we will whip them to the court. <br>They’re skilled in horn pipes, Jigs, &amp; country-rounds <br>God save King James, the devil take his hounds.</p>
-                     </blockquote>
-                  </div>
-
-                  <div class="extract-citation">
-                     <div>
-                        <span>Folger MS V.a.262</span> (
-                        <span>f. 5v</span>)</div>
-                     <div>by
-                        <span>Lady Macbeth</span> in
-                        <span>
-                           <em>Macbeth</em>
-                        </span> (
-                        <span>Shakespeare</span>)</div>
-                  </div>
-               </div>
-
-            </div>
-
-         </div>
-      </div>
-   </div>
+   <main class="container"></main>
 {% endblock %}
 
 {% block javascripts %}
    {{ super() }}
-   <script>require('browse');</script>
+   <script>
+      require(['browse_playwright', 'config'], function (app, config) {
+         app.initialize('main.container', config);
+      });
+   </script>
 {% endblock %}
