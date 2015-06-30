@@ -4,9 +4,7 @@
 
 <dl class="dl-horizontal">
    <dt>Playwright(s)</dt>
-   <dd><a href="#">TODO: playwrights</a></dd>
-   <dt>Edition(s)</dt>
-   <dd>
-      <a href="#" target="_blank">TODO:editions</a>
-   </dd>
+   {% for pw in playwrights %}
+      <dd><a href="browse-playwright.html#pws/{{ pw.id }}">{{ pw.name }}</a></dd>
+   {% endfor %}
 </dl>
