@@ -1,7 +1,6 @@
 define(function(require) {
    var Backbone = require('backbone');
    var Radio = require('backbone.radio');
-   var _ = require('underscore');
 
    var ManuscriptRepository = require('./manuscripts/manuscript_repository');
    var ManuscriptApp = require('./manuscripts/manuscripts_app');

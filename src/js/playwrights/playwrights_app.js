@@ -3,6 +3,9 @@ define(function (require) {
    var Marionette = require('marionette');
    var _ = require('underscore');
 
+   var PlaywrightView = require('./views/playwright_view');
+
+
    var PlaywrightController = Marionette.Controller.extend({
 
       initialize: function (options) {
@@ -30,6 +33,10 @@ define(function (require) {
          this.repo.get(id).then(function (playwright) {
             // HACK: what should be a 'handler' is doing the triggering.
             _this.channel.trigger('show:playwright', playwright);
+
+            _this.layout.getRegion('content').show(new PlaywrightView({
+               model: playwright
+            }));
          });
       }
 

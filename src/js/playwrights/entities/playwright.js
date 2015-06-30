@@ -6,7 +6,12 @@ define(function (require) {
    var Playwright = Backbone.Model.extend({
 
       defaults: {
-         names: [],
+         names: []
+      },
+
+      getName: function () {
+         var names = this.get('names');
+         return names.length === 0 ? 'unknown name' : names[0];
       }
 
    });

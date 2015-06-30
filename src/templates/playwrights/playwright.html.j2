@@ -1,0 +1,12 @@
+<div class="page-header">
+   <h2>{{ names[0] }}</h2>
+</div>
+
+{% if names|length > 1 %}
+   <dl class="horizontal">
+      <dt>Also known as</dt>
+      {% for i in range(1, names|length) %}
+         <dd>{{ names[i] }}</dd>
+      {% endfor %}
+   </dl>
+{% endif %}
