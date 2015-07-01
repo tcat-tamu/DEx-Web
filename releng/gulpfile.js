@@ -130,7 +130,8 @@ gulp.task('html', function () {
          srcPath + '/html/browse-manuscript.html.j2',
          srcPath + '/html/browse-play.html.j2',
          srcPath + '/html/browse-playwright.html.j2',
-         srcPath + '/html/search-advanced.html.j2'
+         srcPath + '/html/search-advanced.html.j2',
+         srcPath + '/html/upload.html.j2'
       ])
       .pipe(nunjucksRender({
          baseUrl: baseUrl

@@ -1,0 +1,54 @@
+{% extends 'layout.html.j2' %}
+
+{% block title %}File Upload - {{ super() }}{% endblock %}
+
+{% block stylesheets %}
+   {{ super() }}
+   <style>
+      .drop-target {
+         border: 5px dashed #ccc;
+         margin: 20px auto;
+         padding: 30px;
+         font-size: 20px;
+         text-align: center;
+      }
+
+      .drop-target.hover {
+         border: 5px dashed #0c0;
+      }
+
+      .drop-target img {
+         display: block;
+         margin: 10px auto;
+      }
+
+      progress {
+         width: 100%;
+      }
+
+      progress:after {
+         content: '%';
+      }
+   </style>
+{% endblock %}
+
+{% block header %}
+   <header>
+      <div class="container">
+         <h1 id="page-title">Upload TEI File</h1>
+      </div>
+   </header>
+{% endblock %}
+
+{% block content %}
+   <main class="container"></main>
+{% endblock %}
+
+{% block javascripts %}
+   {{ super() }}
+   <script>
+      require(['upload', 'config'], function (app, config) {
+         app.initialize('main.container', config);
+      });
+   </script>
+{% endblock %}

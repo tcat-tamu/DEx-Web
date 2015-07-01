@@ -124,12 +124,43 @@ define(function (require) {
     }
 
 
+    function doUpload(url, formData, options) {
+      var opts = _.defaults(_.clone(options) || {}, {
+
+      });
+
+      return new Promise(function (resolve, reject) {
+         var xhr = new XMLHttpRequest();
+         xhr.open('POST', url);
+
+         xhr.onload = function () {
+            resolve(xhr.response);
+         };
+
+         if (xhr.upload && _.isFunction(opts.uploadProgress)) {
+            xhr.upload.onprogress = opts.uploadProgress;
+         }
+
+         if (_.isFunction(opts.downloadProgress)) {
+            xhr.onprogress = opts.downloadProgress;
+         }
+
+         xhr.onerror = function () {
+            reject(xhr);
+         };
+
+         xhr.send(formData);
+      });
+   }
+
+
     var api = {
         send: send,
         get: doGet,
         post: doPost,
         put: doPut,
-        delete: doDelete
+        delete: doDelete,
+        upload: doUpload
     };
 
     return api;
