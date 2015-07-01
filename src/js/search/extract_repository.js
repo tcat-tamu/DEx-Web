@@ -8,7 +8,7 @@ define(function (require) {
 
 
    function ExtractRepository(options) {
-      var opts = _.defaults(_.clone(options || {}), {});
+      var opts = _.defaults(_.clone(options) || {}, {});
 
       if (!opts.apiEndpoint) {
          throw new TypeError('no API endpoint provided');
@@ -30,7 +30,7 @@ define(function (require) {
             };
          }
 
-         var opts = _.defaults(_.clone(options || {}), {
+         var opts = _.defaults(_.clone(options) || {}, {
             query: '',
             shelfmark: '',
             playwright: '',
@@ -42,7 +42,7 @@ define(function (require) {
             basic: false
          });
 
-         opts.facets = _.defaults(_.clone(opts.facets || {}), {
+         opts.facets = _.defaults(_.clone(opts.facets) || {}, {
             manuscript: [],
             playwright: [],
             play: [],

@@ -12,7 +12,7 @@ define(function (require) {
    var SearchController = Marionette.Controller.extend({
 
       initialize: function (options) {
-         var opts = _.defaults(_.clone(options || {}), {});
+         var opts = _.defaults(_.clone(options) || {}, {});
 
          if (!opts.layout) {
             throw new TypeError('no layout provided');
@@ -22,7 +22,7 @@ define(function (require) {
       },
 
       showResults: function (searchResponse, options) {
-         var opts = _.defaults(_.clone(options || {}), {
+         var opts = _.defaults(_.clone(options) || {}, {
             hideFacets: []
          });
 

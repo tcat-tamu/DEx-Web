@@ -30,7 +30,7 @@ define(function (require) {
       },
 
       initialize: function (options) {
-         var opts = _.defaults(_.clone(options || {}), {
+         var opts = _.defaults(_.clone(options) || {}, {
             current: 1,
             padding: 4
          });

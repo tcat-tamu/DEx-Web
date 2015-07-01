@@ -6,7 +6,7 @@ define(function (require) {
    var Character = require('./entities/character');
 
    function CharacterRepository(options) {
-       var opts = _.extend(_.defaults(options || {}), {
+       var opts = _.defaults(_.clone(options) || {}, {
 
        });
 

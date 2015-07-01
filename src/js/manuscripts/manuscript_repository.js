@@ -6,7 +6,7 @@ define(function (require) {
    var Manuscript = require('./entities/manuscript');
 
    function ManuscriptRepository(options) {
-       var opts = _.extend(_.defaults(options || {}), {
+       var opts = _.defaults(_.clone(options) || {}, {
 
        });
 

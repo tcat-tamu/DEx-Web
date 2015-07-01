@@ -9,7 +9,7 @@ define(function (require) {
    var PlaywrightController = Marionette.Controller.extend({
 
       initialize: function (options) {
-         var opts = _.defaults(_.clone(options || {}), {
+         var opts = _.defaults(_.clone(options) || {}, {
 
          });
 
@@ -54,7 +54,7 @@ define(function (require) {
 
    return {
       initialize: function (options) {
-         var opts = _.defaults(_.clone(options || {}), {
+         var opts = _.defaults(_.clone(options) || {}, {
 
          });
 

@@ -22,7 +22,7 @@ define(function (require) {
       },
 
       initialize: function (options) {
-         var opts = _.defaults(_.clone(options || {}), {
+         var opts = _.defaults(_.clone(options) || {}, {
             title: ''
          });
 
@@ -44,7 +44,7 @@ define(function (require) {
       },
 
       initialize: function (options) {
-         var opts = _.defaults(_.clone(options || {}), {
+         var opts = _.defaults(_.clone(options) || {}, {
             title: ''
          });
 
@@ -71,7 +71,7 @@ define(function (require) {
       },
 
       initialize: function (options) {
-         var opts = _.defaults(_.clone(options || {}), {
+         var opts = _.defaults(_.clone(options) || {}, {
             title: ''
          });
 

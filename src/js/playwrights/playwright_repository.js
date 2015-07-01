@@ -6,7 +6,7 @@ define(function (require) {
    var Playwright = require('./entities/playwright');
 
    function PlaywrightRepository(options) {
-       var opts = _.extend(_.defaults(options || {}), {
+       var opts = _.defaults(_.clone(options) || {}, {
 
        });
 
