@@ -13,6 +13,15 @@ define(function (require) {
    });
 
 
-   return Character;
+   var CharacterCollection = Backbone.Collection.extend({
+      model: Character,
+      comparator: 'name'
+   });
+
+
+   return {
+      Character: Character,
+      CharacterCollection: CharacterCollection
+   };
 
 });

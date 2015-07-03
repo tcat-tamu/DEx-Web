@@ -14,11 +14,23 @@ define(function (require) {
       initialize: function (options) {
          var opts = _.defaults(_.clone(options) || {}, {});
 
-         if (!opts.layout) {
-            throw new TypeError('no layout provided');
+         if (!opts.resultsRegion) {
+            throw new TypeError('no results region provided');
          }
 
-         this.mergeOptions(options, ['layout']);
+         if (!opts.paginationRegion) {
+            throw new TypeError('no pagination region provided');
+         }
+
+         if (!opts.facetsRegion) {
+            throw new TypeError('no facets region provided');
+         }
+
+         if (!opts.repo) {
+            throw new TypeError('no repository provided');
+         }
+
+         this.mergeOptions(options, ['resultsRegion', 'paginationRegion', 'facetsRegion', 'repo']);
       },
 
       showResults: function (searchResponse, options) {
@@ -30,7 +42,7 @@ define(function (require) {
             collection: searchResponse.results
          });
 
-         this.layout.getRegion('results').show(resultsView);
+         this.resultsRegion.show(resultsView);
 
 
          var paginatorView = new PaginatorView({
@@ -46,7 +58,7 @@ define(function (require) {
             });
          });
 
-         this.layout.getRegion('pagination').show(paginatorView);
+         this.paginationRegion.show(paginatorView);
 
          var filteredFacets = searchResponse.facets.filter(function (facetField) {
             return !_.contains(opts.hideFacets, facetField.get('field'));
@@ -64,14 +76,30 @@ define(function (require) {
             });
          });
 
-         this.layout.getRegion('facets').show(facetsView);
+         this.facetsRegion.show(facetsView);
       },
 
       clearResults: function () {
-         this.layout.getRegion('results').empty();
-         this.layout.getRegion('facets').empty();
-         this.layout.getRegion('pagination').empty();
+         this.resultsRegion.empty();
+         this.facetsRegion.empty();
+         this.paginationRegion.empty();
+      },
+
+      browseBy: function (field, id) {
+         var facets = {};
+         facets[field] = [id];
+
+         var _this = this;
+         this.repo.search({
+            facets: facets
+         })
+         .then(function (results) {
+            _this.showResults(results, {
+               hideFacets: [field]
+            });
+         });
       }
+
    });
 
    return SearchController;

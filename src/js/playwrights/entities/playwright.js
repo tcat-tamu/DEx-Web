@@ -17,6 +17,15 @@ define(function (require) {
    });
 
 
-   return Playwright;
+   var PlaywrightCollection = Backbone.Collection.extend({
+      model: Playwright,
+      comparator: function (pw) { return pw.getName(); }
+   });
+
+
+   return {
+      Playwright: Playwright,
+      PlaywrightCollection: PlaywrightCollection
+   };
 
 });

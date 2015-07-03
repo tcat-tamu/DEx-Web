@@ -14,6 +14,15 @@ define(function (require) {
    });
 
 
-   return Play;
+   var PlayCollection = Backbone.Collection.extend({
+      model: Play,
+      comparator: 'title'
+   });
+
+
+   return {
+      Play: Play,
+      PlayCollection: PlayCollection
+   };
 
 });

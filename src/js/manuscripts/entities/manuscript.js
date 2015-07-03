@@ -12,7 +12,15 @@ define(function (require) {
 
    });
 
+   var ManuscriptCollection = Backbone.Collection.extend({
+      model: Manuscript,
+      comparator: 'title'
+   });
 
-   return Manuscript;
+
+   return {
+      Manuscript: Manuscript,
+      ManuscriptCollection: ManuscriptCollection
+   };
 
 });

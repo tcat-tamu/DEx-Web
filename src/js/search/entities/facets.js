@@ -60,10 +60,7 @@ define(function (require) {
       getSelected: function () {
          var selected = {};
          this.each(function (field) {
-            selected[field.get('field')] = _.chain(field.getSelected())
-               .invoke('toJSON')
-               .pluck('label')
-               .value();
+            selected[field.get('field')] = _.chain(field.getSelected()).pluck('id').value();
          });
          return selected;
       }

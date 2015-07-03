@@ -4,17 +4,18 @@ define(function(require) {
 
    var CharacterRepository = require('./characters/character_repository');
    var CharacterApp = require('./characters/characters_app');
+   var SearchApp = require('./search/search_app');
    var ExtractRepository = require('./search/extract_repository');
-   var SearchController = require('./search/search_controller');
    var LayoutView = require('./search/views/layout_view');
 
    function initialize(el, config) {
-      var charRepo = new CharacterRepository({
-         apiEndpoint: config.apiEndpoint + '/chars'
-      });
-
       var extractRepo = new ExtractRepository({
          apiEndpoint: config.apiEndpoint + '/extracts'
+      });
+
+      var charRepo = new CharacterRepository({
+         apiEndpoint: config.apiEndpoint + '/chars',
+         searchRepo: extractRepo
       });
 
       var layout = new LayoutView({
@@ -25,27 +26,18 @@ define(function(require) {
 
       var channel = Radio.channel('dex');
 
-      CharacterApp.initialize({
-         repo: charRepo,
-         layout: layout,
+      SearchApp.initialize({
+         repo: extractRepo,
+         resultsRegion: layout.getRegion('results'),
+         paginationRegion: layout.getRegion('pagination'),
+         facetsRegion: layout.getRegion('facets'),
          channel: channel
       });
 
-      var searchController = new SearchController({
-         layout: layout
-      });
-
-      channel.on('show:character', function (character) {
-         extractRepo.search({
-               facets: {
-                  character: [character.get('name')]
-               }
-            })
-            .then(function (results) {
-               searchController.showResults(results, {
-                  hideFacets: ['character']
-               });
-            });
+      CharacterApp.initialize({
+         repo: charRepo,
+         region: layout.getRegion('content'),
+         channel: channel
       });
 
       Backbone.history.start();

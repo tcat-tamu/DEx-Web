@@ -4,17 +4,18 @@ define(function(require) {
 
    var PlayRepository = require('./plays/play_repository');
    var PlayApp = require('./plays/plays_app');
+   var SearchApp = require('./search/search_app');
    var ExtractRepository = require('./search/extract_repository');
-   var SearchController = require('./search/search_controller');
    var LayoutView = require('./search/views/layout_view');
 
    function initialize(el, config) {
-      var playsRepo = new PlayRepository({
-         apiEndpoint: config.apiEndpoint + '/plays'
-      });
-
       var extractRepo = new ExtractRepository({
          apiEndpoint: config.apiEndpoint + '/extracts'
+      });
+
+      var playsRepo = new PlayRepository({
+         apiEndpoint: config.apiEndpoint + '/plays',
+         searchRepo: extractRepo
       });
 
       var layout = new LayoutView({
@@ -27,25 +28,16 @@ define(function(require) {
 
       PlayApp.initialize({
          repo: playsRepo,
-         layout: layout,
+         region: layout.getRegion('content'),
          channel: channel
       });
 
-      var searchController = new SearchController({
-         layout: layout
-      });
-
-      channel.on('show:play', function (play) {
-         extractRepo.search({
-               facets: {
-                  play: [play.get('title')]
-               }
-            })
-            .then(function (results) {
-               searchController.showResults(results, {
-                  hideFacets: ['play']
-               });
-            });
+      SearchApp.initialize({
+         repo: extractRepo,
+         resultsRegion: layout.getRegion('results'),
+         paginationRegion: layout.getRegion('pagination'),
+         facetsRegion: layout.getRegion('facets'),
+         channel: channel
       });
 
       Backbone.history.start();

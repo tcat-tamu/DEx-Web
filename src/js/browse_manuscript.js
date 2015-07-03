@@ -4,17 +4,18 @@ define(function(require) {
 
    var ManuscriptRepository = require('./manuscripts/manuscript_repository');
    var ManuscriptApp = require('./manuscripts/manuscripts_app');
+   var SearchApp = require('./search/search_app');
    var ExtractRepository = require('./search/extract_repository');
-   var SearchController = require('./search/search_controller');
    var LayoutView = require('./search/views/layout_view');
 
    function initialize(el, config) {
-      var mssRepo = new ManuscriptRepository({
-         apiEndpoint: config.apiEndpoint + '/mss'
-      });
-
       var extractRepo = new ExtractRepository({
          apiEndpoint: config.apiEndpoint + '/extracts'
+      });
+
+      var mssRepo = new ManuscriptRepository({
+         apiEndpoint: config.apiEndpoint + '/mss',
+         searchRepo: extractRepo
       });
 
       var layout = new LayoutView({
@@ -27,25 +28,16 @@ define(function(require) {
 
       ManuscriptApp.initialize({
          repo: mssRepo,
-         layout: layout,
+         region: layout.getRegion('content'),
          channel: channel
       });
 
-      var searchController = new SearchController({
-         layout: layout
-      });
-
-      channel.on('show:manuscript', function (manuscript) {
-         extractRepo.search({
-               facets: {
-                  manuscript: [manuscript.get('title')]
-               }
-            })
-            .then(function (results) {
-               searchController.showResults(results, {
-                  hideFacets: ['manuscript']
-               });
-            });
+      SearchApp.initialize({
+         repo: extractRepo,
+         resultsRegion: layout.getRegion('results'),
+         paginationRegion: layout.getRegion('pagination'),
+         facetsRegion: layout.getRegion('facets'),
+         channel: channel
       });
 
       Backbone.history.start();

@@ -4,6 +4,7 @@ define(function (require) {
    var _ = require('underscore');
 
    var PlaywrightView = require('./views/playwright_view');
+   var PlaywrightListView = require('./views/playwright_list_view');
 
 
    var PlaywrightController = Marionette.Controller.extend({
@@ -17,24 +18,38 @@ define(function (require) {
             throw new TypeError('no playwright repository provided');
          }
 
-         if (!opts.layout) {
-            throw new TypeError('no layout provided');
+         if (!opts.region) {
+            throw new TypeError('no region provided');
          }
 
          if (!opts.channel) {
             throw new TypeError('no channel provided');
          }
 
-         this.mergeOptions(opts, ['repo', 'layout', 'channel']);
+         this.mergeOptions(opts, ['repo', 'region', 'channel']);
+      },
+
+      listPlaywrights: function () {
+         var _this = this;
+         this.repo.getAll().then(function (playwrights) {
+            var view = new PlaywrightListView({
+               collection: playwrights
+            });
+
+            view.on('childview:click', function (itemView, model) {
+               _this.channel.trigger('show:playwright', model.id);
+            });
+
+            _this.region.show(view);
+         });
       },
 
       browseByPlaywright: function (id) {
          var _this = this;
+         this.channel.trigger('search:playwright', id);
          this.repo.get(id).then(function (playwright) {
-            // HACK: what should be a 'handler' is doing the triggering.
-            _this.channel.trigger('show:playwright', playwright);
 
-            _this.layout.getRegion('content').show(new PlaywrightView({
+            _this.region.show(new PlaywrightView({
                model: playwright
             }));
          });
@@ -46,6 +61,7 @@ define(function (require) {
    var PlaywrightRouter = Marionette.AppRouter.extend({
 
       appRoutes: {
+         '': 'listPlaywrights',
          'pws/:id': 'browseByPlaywright'
       }
 
@@ -58,12 +74,23 @@ define(function (require) {
 
          });
 
+         if (!opts.channel) {
+            throw new TypeError('no channel provided');
+         }
+
+         var controller = new PlaywrightController({
+            repo: opts.repo,
+            region: opts.region,
+            channel: opts.channel
+         });
+
          var router = new PlaywrightRouter({
-            controller: new PlaywrightController({
-               repo: opts.repo,
-               layout: opts.layout,
-               channel: opts.channel
-            })
+            controller: controller
+         });
+
+         opts.channel.on('show:playwright', function (id) {
+            controller.browseByPlaywright(id);
+            router.navigate('pws/' + id);
          });
 
          return router;

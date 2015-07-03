@@ -19,6 +19,40 @@ define(function (require) {
 
    _.extend(ExtractRepository.prototype, {
 
+      getAll: function (field) {
+         return this.search({
+               resultsPerPage: 0,
+               numFacets: -1
+            })
+            .then(function (response) {
+               var facetField = response.facets.findWhere({
+                  field: field
+               });
+
+               if (!facetField) {
+                  return null;
+               }
+
+               return facetField.get('items');
+            });
+      },
+
+      getCharacters: function () {
+         return this.getAll('character');
+      },
+
+      getManuscripts: function () {
+         return this.getAll('manuscript');
+      },
+
+      getPlays: function () {
+         return this.getAll('play');
+      },
+
+      getPlaywrights: function () {
+         return this.getAll('playwright');
+      },
+
       search: function (options) {
          options = options || '';
 
@@ -37,6 +71,7 @@ define(function (require) {
             play: '',
             character: '',
             facets: null, // defaults set later
+            numFacets: 10,
             page: 1,
             resultsPerPage: 20,
             basic: false
@@ -59,7 +94,8 @@ define(function (require) {
             sp: opts.character,
             'f.sp': opts.facets.character,
             p: opts.page,
-            n: opts.resultsPerPage
+            n: opts.resultsPerPage,
+            'f.n': opts.numFacets
          };
 
          if (opts.basic) {
