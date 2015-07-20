@@ -1,0 +1,30 @@
+{
+  "libs": [
+    "browser",
+    "ecma5",
+    "ecma6",
+    "jquery"
+  ],
+  "loadEagerly": [
+    "src/js/**/*.js"
+  ],
+  "plugins": {
+    "complete_strings": {},
+    "requirejs": {
+      "paths": {
+        "backbone": "build/vendor/backbone/backbone",
+        "backbone.radio": "build/vendor/backbone.radio/build/backbone.radio",
+        "bootstrap": "build/vendor/bootstrap/dist/js/bootstrap",
+        "freewall": "build/vendor/freewall/freewall",
+        "jquery": "build/vendor/jquery/dist/jquery",
+        "marionette": "build/vendor/marionette/lib/backbone.marionette",
+        "nunjucks": "build/vendor/nunjucks/browser/nunjucks-slim",
+        "promise": "build/vendor/bluebird/js/browser/bluebird",
+        "underscore": "build/vendor/underscore/underscore"
+      }
+    },
+    "doc_comment": {
+     "fullDocs": true
+    }
+  }
+}
