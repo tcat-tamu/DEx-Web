@@ -133,8 +133,14 @@ define(function (require) {
          var xhr = new XMLHttpRequest();
          xhr.open('POST', url);
 
-         xhr.onload = function () {
-            resolve(xhr.response);
+         xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+               if (xhr.status >= 200 && xhr.status < 400) {
+                  resolve(xhr.response);
+               } else {
+                  reject(xhr.status);
+               }
+            }
          };
 
          if (xhr.upload && _.isFunction(opts.uploadProgress)) {
