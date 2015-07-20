@@ -17,7 +17,7 @@ var srcPath = '../src/';
 var stagingPath = '../build';
 var vendorPath = stagingPath + '/vendor';
 var distPath = '../dist/';
-var baseUrl = '/~matt.barry/dex-site';
+var baseUrl = '';
 
 
 function makeCopyTask(source, dest) {
