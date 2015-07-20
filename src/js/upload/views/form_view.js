@@ -9,6 +9,12 @@ define(function (require) {
       tagName: 'form',
       template: _.partial(nunjucks.render, 'upload/form.html'),
 
+      templateHelpers: function () {
+         return {
+            title: this.title
+         };
+      },
+
       ui: {
          dropTarget: '> .drop-target',
          fallbackForm: '> .upload-form',
@@ -39,6 +45,12 @@ define(function (require) {
             this.ui.dropTarget.removeClass('hover');
             this.trigger('upload', evt.originalEvent.dataTransfer.files);
          }
+      },
+
+      initialize: function (options) {
+         var opts = _.defaults(_.clone(options) || {}, {});
+
+         this.mergeOptions(opts, ['title']);
       },
 
       onShow: function () {

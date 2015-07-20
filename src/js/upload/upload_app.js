@@ -5,6 +5,7 @@ define(function (require) {
 
    var RestClient = require('rest_client');
 
+   var UploadChooserView = require('./views/chooser_view');
    var UploadFormView = require('./views/form_view');
 
    /**
@@ -24,6 +25,10 @@ define(function (require) {
       initialize: function (options) {
          var opts = _.defaults(_.clone(options) || {}, {});
 
+         if (!opts.channel) {
+            throw new TypeError('no channel provided');
+         }
+
          if (!opts.region) {
             throw new TypeError('no region provided');
          }
@@ -32,82 +37,131 @@ define(function (require) {
             throw new TypeError('no upload API endpoint provided');
          }
 
-         this.mergeOptions(opts, ['region', 'apiEndpoint']);
+         this.mergeOptions(opts, ['channel', 'region', 'apiEndpoint']);
       },
 
-      showUploadForm: function () {
-         var formView = new UploadFormView();
+      showUploadChooser: function () {
+         var chooserView = new UploadChooserView({
+            channel: this.channel
+         });
+
+         this.region.show(chooserView);
+      },
+
+      showManuscriptUploadForm: function () {
+         var formView = new UploadFormView({
+            title: 'Upload Manuscripts'
+         });
 
          formView.on('upload', function (files) {
-            this.uploadFiles(files);
+            _.each(files, function (file) {
+               var manuscriptId = prompt('Enter manuscript ID for [' + file.name + '] or cancel to prevent upload:', basename(file.name));
+
+               if (!_.isNull(manuscriptId)) {
+                  var formData = new FormData();
+                  formData.append('msid', manuscriptId);
+                  formData.append('file', file);
+                  RestClient.upload(this.apiEndpoint + '/manuscript', formData)
+                     .then(function () {
+                        alert('successfully uploaded file [' + file.name + ']');
+                     })
+                     .catch(function (err) {
+                        alert('unable to upload file [' + file.name + ']: ' + err);
+                     });
+               }
+            }, this);
          }, this);
 
          this.region.show(formView);
       },
 
+      showPeopleAndPlaysUploadForm: function () {
+         var formView = new UploadFormView({
+            title: 'Upload People and Plays'
+         });
+
+         formView.on('upload', function (files) {
+            _.each(files, function (file) {
+               var formData = new FormData();
+               formData.append('file', file);
+               RestClient.upload(this.apiEndpoint + '/peopleandplays', formData)
+                  .then(function () {
+                     alert('successfully uploaded file [' + file.name + ']');
+                  })
+                  .catch(function (err) {
+                     alert('unable to upload file [' + file.name + ']: ' + err);
+                  });
+            }, this);
+         }, this);
+
+         this.region.show(formView);
+      }
+
+      /*
       uploadFiles: function (files) {
          var formData = new FormData();
 
-         for (var i = 0; i < files.length; i++) {
-            var file = files[i];
-
-            var manuscriptId = prompt('Enter manuscript ID:', basename(file.name));
+         _.each(files, function (file) {
+            var manuscriptId = prompt('Enter manuscript ID for [' + file.name + '] or cancel to prevent upload:', basename(file.name));
 
             if (!_.isNull(manuscriptId)) {
                file.name = manuscriptId;
                formData.append('file', file);
             }
-         }
+         });
 
          // code for previewing image uploads
-         //
-         // var acceptedTypes = {
-         //    'image/png': true,
-         //    'image/jpeg': true,
-         //    'image/gif': true
-         // };
-         //
-         // var holder = document.getElementById('holder');
-         //
-         // function previewfile(file) {
-         //    if (acceptedTypes[file.type] === true) {
-         //       var reader = new FileReader();
-         //
-         //       reader.onload = function(event) {
-         //          var image = new Image();
-         //          image.src = event.target.result;
-         //          image.width = 250; // a fake resize
-         //          holder.appendChild(image);
-         //       };
-         //
-         //       reader.readAsDataURL(file);
-         //    } else {
-         //       holder.innerHTML += 'Uploaded ' + file.name + ' ' + (file.size ? (file.size / 1024 | 0) + 'K' : '');
-         //    }
-         // }
+
+         var acceptedTypes = {
+            'image/png': true,
+            'image/jpeg': true,
+            'image/gif': true
+         };
+
+         var holder = document.getElementById('holder');
+
+         function previewfile(file) {
+            if (acceptedTypes[file.type] === true) {
+               var reader = new FileReader();
+
+               reader.onload = function(event) {
+                  var image = new Image();
+                  image.src = event.target.result;
+                  image.width = 250; // a fake resize
+                  holder.appendChild(image);
+               };
+
+               reader.readAsDataURL(file);
+            } else {
+               holder.innerHTML += 'Uploaded ' + file.name + ' ' + (file.size ? (file.size / 1024 | 0) + 'K' : '');
+            }
+         }
 
 
          // TODO: keep upload progress indicator
-         // var progress = { setValue: _.bind(console.log, console) };
+         var progress = { setValue: _.bind(console.log, console) };
 
          RestClient.upload(this.apiEndpoint, formData, {
-            // uploadProgress: function (evt) {
-            //    if (evt.lengthComputable) {
-            //       progress.setValue(evt.loaded / evt.total);
-            //    }
-            // }
+            uploadProgress: function (evt) {
+               if (evt.lengthComputable) {
+                  progress.setValue(evt.loaded / evt.total);
+               }
+            }
          })
-         // .then(function () {
-         //    progress.setValue(1);
-         // })
+         .then(function () {
+            progress.setValue(1);
+         })
          ;
       }
+      */
    });
 
 
    var UploadRouter = Marionette.AppRouter.extend({
       appRoutes: {
-         'upload': 'showUploadForm'
+         '': 'showUploadChooser',
+         'manuscript': 'showManuscriptUploadForm',
+         'peopleandplays': 'showPeopleAndPlaysUploadForm'
       }
    });
 
@@ -122,6 +176,7 @@ define(function (require) {
 
 
          var controller = new UploadController({
+            channel: opts.channel,
             region: opts.region,
             apiEndpoint: opts.apiEndpoint
          });
@@ -131,9 +186,9 @@ define(function (require) {
          });
 
 
-         opts.channel.on('show:upload', function () {
-            controller.showUploadForm();
-            router.navigate('upload');
+         opts.channel.on('upload:manuscript', function () {
+            controller.showManuscriptUploadForm();
+            router.navigate('manuscript');
          });
 
          return router;
