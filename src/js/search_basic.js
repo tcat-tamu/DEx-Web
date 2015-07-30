@@ -1,12 +1,12 @@
 define(function (require) {
 
-   var Marionette = require('marionette');
-   var _ = require('underscore');
+   var Backbone = require('backbone');
+   var Radio = require('backbone.radio');
 
+   var SearchApp = require('./search/search_app');
+   var ExtractRepository = require('./search/extract_repository');
    var LayoutView = require('./search/views/layout_view');
    var BasicFormView = require('./search/views/basic_form_view');
-   var SearchController = require('./search/search_controller');
-   var ExtractRepository = require('./search/extract_repository');
 
 
    function initialize(el, config) {
@@ -20,44 +20,35 @@ define(function (require) {
 
       layout.render();
 
+      var channel = Radio.channel('dex');
 
-      function handleError(err) {
-         console.error(err);
-         layout.getRegion('results').show(new Marionette.ItemView({
-            className: 'alert alert-danger',
-            template: _.constant(err || 'An unknown error occurred.')
-         }));
-      }
-
-      var controller = new SearchController({
-         layout: layout
+      SearchApp.initialize({
+         repo: repo,
+         resultsRegion: layout.getRegion('results'),
+         paginationRegion: layout.getRegion('pagination'),
+         facetsRegion: layout.getRegion('facets'),
+         channel: channel
       });
 
 
       var formView = new BasicFormView();
 
       formView.on('search', function (query) {
-         repo.search(query)
-            .then(function (results) {
-               controller.showResults(results);
-            })
-            .catch(handleError);
+         channel.trigger('search:basic', query);
       });
 
       formView.on('clear', function () {
-         controller.clearResults();
+         channel.trigger('search:clear');
       });
 
       layout.getRegion('form').show(formView);
 
       // populate form with default "query-all"
-      repo.search()
-         .then(function (results) {
-            controller.showResults(results);
-         })
-         .catch(handleError);
-   }
+      channel.trigger('search:basic', '');
 
+
+      Backbone.history.start();
+   }
 
    return {
       initialize: initialize

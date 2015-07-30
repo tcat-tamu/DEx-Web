@@ -142,16 +142,15 @@ define(function (require) {
          var progress = { setValue: _.bind(console.log, console) };
 
          RestClient.upload(this.apiEndpoint, formData, {
-            uploadProgress: function (evt) {
-               if (evt.lengthComputable) {
-                  progress.setValue(evt.loaded / evt.total);
+               uploadProgress: function (evt) {
+                  if (evt.lengthComputable) {
+                     progress.setValue(evt.loaded / evt.total);
+                  }
                }
-            }
-         })
-         .then(function () {
-            progress.setValue(1);
-         })
-         ;
+            })
+            .then(function () {
+               progress.setValue(1);
+            });
       }
       */
    });
@@ -189,6 +188,11 @@ define(function (require) {
          opts.channel.on('upload:manuscript', function () {
             controller.showManuscriptUploadForm();
             router.navigate('manuscript');
+         });
+
+         opts.channel.on('upload:peopleandplays', function () {
+            controller.showPeopleAndPlaysUploadForm();
+            router.navigate('peopleandplays');
          });
 
          return router;

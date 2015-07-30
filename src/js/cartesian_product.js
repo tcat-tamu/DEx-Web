@@ -1,4 +1,5 @@
 define(function (require) {
+
    var _ = require('underscore');
 
    /**
@@ -18,4 +19,5 @@ define(function (require) {
    }
 
    return cartesianProduct;
+
 });

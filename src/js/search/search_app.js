@@ -31,6 +31,21 @@ define(function (require) {
          });
 
 
+
+         opts.channel.on('search:basic', function (query) {
+            controller.basicSearch(query);
+         });
+
+         opts.channel.on('search:advanced', function (params) {
+            controller.advancedSearch(params);
+         });
+
+
+         opts.channel.on('search:clear', function () {
+            controller.clearResults();
+         });
+
+
          opts.channel.on('search:character', function (id) {
             controller.browseBy('character', id);
          });

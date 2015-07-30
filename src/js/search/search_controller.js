@@ -33,6 +33,28 @@ define(function (require) {
          this.mergeOptions(options, ['resultsRegion', 'paginationRegion', 'facetsRegion', 'repo']);
       },
 
+      basicSearch: function (query) {
+         var _this = this;
+         this.repo.search(query)
+            .then(function (results) {
+               _this.showResults(results);
+            })
+            .catch(function (err) {
+               _this.handleError(err);
+            });
+      },
+
+      advancedSearch: function (params) {
+         var _this = this;
+         this.repo.search(params)
+            .then(function (results) {
+               _this.showResults(results);
+            })
+            .catch(function (err) {
+               _this.handleError(err);
+            });
+      },
+
       showResults: function (searchResponse, options) {
          var opts = _.defaults(_.clone(options) || {}, {
             hideFacets: []
@@ -79,6 +101,13 @@ define(function (require) {
          this.facetsRegion.show(facetsView);
       },
 
+      handleError: function (err) {
+         this.resultsRegion.show(new Marionette.ItemView({
+            className: 'alert alert-danger',
+            template: _.constant(err || 'An unknown error occurred.')
+         }));
+      },
+
       clearResults: function () {
          this.resultsRegion.empty();
          this.facetsRegion.empty();
@@ -97,6 +126,9 @@ define(function (require) {
             _this.showResults(results, {
                hideFacets: [field]
             });
+         })
+         .catch(function (err) {
+            _this.handleError(err);
          });
       }
 

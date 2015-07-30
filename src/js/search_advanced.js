@@ -1,13 +1,12 @@
 define(function (require) {
 
-   var Marionette = require('marionette');
-   var _ = require('underscore');
+   var Backbone = require('backbone');
+   var Radio = require('backbone.radio');
 
-   var LayoutView = require('./search/views/layout_view');
-   var SearchController = require('./search/search_controller');
-   var AdvancedFormView = require('./search/views/advanced_form_view');
-
+   var SearchApp = require('./search/search_app');
    var ExtractRepository = require('./search/extract_repository');
+   var LayoutView = require('./search/views/layout_view');
+   var AdvancedFormView = require('./search/views/advanced_form_view');
 
 
    function initialize(el, config) {
@@ -21,32 +20,31 @@ define(function (require) {
 
       layout.render();
 
-      var controller = new SearchController({
-         layout: layout
+      var channel = Radio.channel('dex');
+
+      SearchApp.initialize({
+         repo: repo,
+         resultsRegion: layout.getRegion('results'),
+         paginationRegion: layout.getRegion('pagination'),
+         facetsRegion: layout.getRegion('facets'),
+         channel: channel
       });
 
 
       var formView = new AdvancedFormView();
 
       formView.on('search', function (params) {
-         repo.search(params)
-            .then(function (results) {
-               controller.showResults(results);
-            })
-            .catch(function (err) {
-               console.error(err);
-               layout.getRegion('results').show(new Marionette.ItemView({
-                  className: 'alert alert-danger',
-                  template: _.constant(err || 'An unknown error occurred.')
-               }));
-            });
+         channel.trigger('search:advanced', params);
       });
 
       formView.on('clear', function () {
-         controller.clearResults();
+         channel.trigger('search:clear');
       });
 
       layout.getRegion('form').show(formView);
+
+
+      Backbone.history.start();
    }
 
 
