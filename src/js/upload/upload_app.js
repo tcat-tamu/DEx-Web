@@ -59,7 +59,7 @@ define(function (require) {
 
                if (!_.isNull(manuscriptId)) {
                   var formData = new FormData();
-                  formData.append('msid', manuscriptId);
+                  formData.append('id', manuscriptId);
                   formData.append('file', file);
                   RestClient.upload(this.apiEndpoint + '/manuscript', formData)
                      .then(function () {
