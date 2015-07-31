@@ -27,12 +27,14 @@ define(function (require) {
    _.extend(ManuscriptRepository.prototype, {
 
       getAll: function () {
+         var _this = this;
          return this.searchRepo.getManuscripts()
             .then(function (facetItems) {
                var models = facetItems.map(function (facetItem) {
                   return {
                      id: facetItem.id,
-                     title: facetItem.get('label')
+                     title: facetItem.get('label'),
+                     downloadUrl: _this.getTeiDownloadHref(facetItem.id)
                   };
                });
 
@@ -41,9 +43,18 @@ define(function (require) {
       },
 
       get: function (id) {
+         var downloadUrl = this.getTeiDownloadHref(id);
+
          return RestClient.get(this.apiEndpoint + '/' + id).then(function (response) {
-            return new Manuscript(response, { parse: true });
+            var manuscriptAttrs = _.extend(response, {
+               downloadUrl: downloadUrl
+            });
+            return new Manuscript(manuscriptAttrs, { parse: true });
          });
+      },
+
+      getTeiDownloadHref: function (id) {
+         return this.apiEndpoint + '/' + id + '/tei';
       }
 
    });
