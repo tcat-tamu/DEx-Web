@@ -1,4 +1,4 @@
-{% extends 'layout.html.j2' %}
+{% extends '_layout.html.j2' %}
 
 {% macro carousel_item(image, active=false) %}
    <div class="item{% if active %} active{% endif %}" style="background-image: url({{ image }});">

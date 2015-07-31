@@ -121,18 +121,7 @@ gulp.task('html', function () {
       watch: false
    });
 
-   return gulp.src([
-         srcPath + '/html/index.html.j2',
-         srcPath + '/html/about.html.j2',
-         srcPath + '/html/bibliography.html.j2',
-         srcPath + '/html/browse.html.j2',
-         srcPath + '/html/browse-character.html.j2',
-         srcPath + '/html/browse-manuscript.html.j2',
-         srcPath + '/html/browse-play.html.j2',
-         srcPath + '/html/browse-playwright.html.j2',
-         srcPath + '/html/search-advanced.html.j2',
-         srcPath + '/html/upload.html.j2'
-      ])
+   return gulp.src(srcPath + '/html/**/[^_]*.html.j2')
       .pipe(nunjucksRender({
          baseUrl: baseUrl
       }))
