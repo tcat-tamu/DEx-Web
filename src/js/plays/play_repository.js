@@ -5,6 +5,7 @@ define(function (require) {
 
    var Types = require('./entities/play');
 
+   var Bibliography = Types.Bibliography;
    var Play = Types.Play;
    var PlayCollection = Types.PlayCollection;
 
@@ -43,6 +44,12 @@ define(function (require) {
       get: function (id) {
          return RestClient.get(this.apiEndpoint + '/' + id).then(function (response) {
             return new Play(response, { parse: true });
+         });
+      },
+
+      getBibliography: function () {
+         return RestClient.get(this.apiEndpoint).then(function (response) {
+            return new Bibliography({ plays: response }, { parse: true });
          });
       }
 

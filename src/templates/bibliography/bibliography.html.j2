@@ -1,0 +1,42 @@
+{% if plays and plays | length > 0 %}
+   <ol class="plays">
+      {% for play in plays %}
+         <li class="play">
+            <span class="cite">
+               <span class="authors">
+                  {% for playwright in play.playwrights %}
+                     <span class="playwright">{{ playwright }}</span>.
+                  {% endfor %}
+               </span>
+               <span class="title">{{ play.title }}</span>.
+            </span>
+            {% if play.editions and play.editions | length > 0 %}
+               <ol class="editions">
+                  {% for edition in play.editions %}
+                     <li class="edition">
+                        Edition.
+                        <span class="cite">
+                           <span class="authors">
+                              {% for editor in edition.editors %}
+                                 <span class="author">{{ editor }}</span>.
+                              {% endfor %}
+                           </span>
+                           <span class="title">{{ edition.title }}</span>.
+                           {% if edition.date %}
+                              <time class="date">{{ edition.date }}</time>.
+                           {% endif %}
+                           {% if edition.link %}
+                              Web.
+                              &lt;<a href="{{ edition.link }}">{{ edition.link }}</a>&gt;
+                           {% else %}
+                              Print.
+                           {% endif %}
+                        </span>
+                  {% endfor %}
+               </ol>
+            {% endif %}
+      {% endfor %}
+   </ol>
+{% else %}
+   <div class="alert alert-info">No bibliographic info to display.</div>
+{% endif %}

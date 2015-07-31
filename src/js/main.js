@@ -1,6 +1,7 @@
 define('main', [
    'about',
    'bootstrap',
+   'bibliography',
    'browse_character',
    'browse_manuscript',
    'browse_play',
