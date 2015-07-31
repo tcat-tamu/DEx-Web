@@ -18,16 +18,16 @@ define(function (require) {
           throw new TypeError('no API endpoint provided');
        }
 
-       if (!opts.searchRepo) {
-          throw new TypeError('no search repository provided');
-       }
-
        _.extend(this, _.pick(opts, 'apiEndpoint', 'searchRepo'));
    }
 
    _.extend(PlayRepository.prototype, {
 
       getAll: function () {
+         if (!this.searchRepo) {
+            throw new TypeError('no search repository provided');
+         }
+
          return this.searchRepo.getPlays()
             .then(function (facetItems) {
                var models = facetItems.map(function (facetItem) {
