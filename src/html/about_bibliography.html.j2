@@ -1,0 +1,37 @@
+{% extends '_layout.html.j2' %}
+
+{% block header %}
+   <header>
+      <div class="container">
+         <h1>About: Bibliography</h1>
+      </div>
+   </header>
+{% endblock %}
+
+{% block content %}
+   <main class="container">
+     <article>
+       <p>
+         The DEx bibliography offers links to the full texts of plays that were used for spelling
+         normalization.  Where possible, DEx links to an online, edited, modernized spelling version
+         of the play with line numbers, such as the <a href="http://ise.uvic.ca/">Internet Shakespeare Editions</a>.
+         Furthermore, DEx sought complete editions of an author's work have been used for consistency.
+         In some cases, this means that we rely on editions from the Regents Renaissance Drama series, the Revels Plays,
+         and New Mermaids; sometimes the editions we cite are out-of-copyright and we link to them on the
+         <a href="http://archive.org/">Internet Archive</a>. In other cases, such as William Peaps's
+         <i>Love in its Extasie</i>, no modern edition exists of the play.  In those cases, instead of supplying
+         line numbers, I have supplied (where applicable) signature numbers and/or act and scene numbers from an
+         early modern source as described in the bibliography.  Lastly, for some plays, such as the anonymous
+         <i>Tragedy of Nero</i>, there is an online edition without line numbers, whereas the print edition has
+         line numbers but the spelling has not been standardized; in this case, both versions were used, as
+         indicated in the bibliography.
+       </p>
+       <p>
+         The DEx bibliography links to, where possible, existing catalogue descriptions of each manuscript as
+         well as the description of the manuscript in the <a href="http://www.celm-ms.org.uk/">Catalogue of English Literary Manuscripts</a>
+         and the Folger Shakespeare Library's <a href="http://firstlines.folger.edu/">Union First Line Index of English Verse</a>.
+         When available, we also provide links to online facsimiles of the manuscripts.
+      </p>
+     </article>
+   </main>
+{% endblock %}

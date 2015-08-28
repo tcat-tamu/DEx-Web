@@ -1,0 +1,73 @@
+{% extends '_layout.html.j2' %}
+
+{% block header %}
+   <header>
+      <div class="container">
+         <h1>About: How to Use DEx</h1>
+      </div>
+   </header>
+{% endblock %}
+
+{% block content %}
+   <main class="container">
+      <article>
+         <header>
+            <p class="lead">
+               <strong>You can browse or search DEx.</strong>
+            </p>
+         </header>
+
+         <section id="overview">
+         <p>
+           DEx offer two kinds of results: normalized and original.  You can toggle between
+           the two using the button in the top-right of your results.  Original is the spelling
+           in the manuscripts, represented as carefully as possible.  Silent editorial emendations
+           have been made, however, even to the original text: long S is not retained;
+           i/j and u/v/w are regularized. Punctuation in the manuscript sources has been followed as
+           well as possible.
+         </p>
+         <p>
+          Normalized results displays regularized spelling, which allows for increased searchability.
+          Normalized text, furthermore, displays the text as it appears in an edition of the play
+          (see the bibliography and editorial practices), which allows you to compare how a
+          manuscript compiler has changed the text.  Of course, if a person was copying from another
+          manuscript or from a performance, we do not have access to their original text, so, instead,
+          we supplement with an edition based on a print text.  DEx considers punctuation,
+          capitalization, and word-breaks to be incidental, so if a manuscript differs from the
+          edition solely in these ways, that will not be reflected in the normalized text.
+         </p>
+
+         <p>
+          Some DEx extracts include titles that appear in the manuscripts, or marginal notations
+          that appear in the manuscript.  Where possible, we have indicated superlinear additions
+          with superscript.
+         </p>
+
+         <p>
+          DEx offers a faceted browse.  On the left-hand side, you can choose to narrow your results
+          by Manuscript, play, playwright, and speaker.  You can sort these options alphabetically or
+          by the number of results these appear using the sort buttons to the right of each category
+          title.  You can uncheck boxes to broaden your search again.
+         </p>
+
+         <p>
+          For basic search, you can simply enter any keyword, playwright, speaker, or title into the
+          search bar on the top left.  [[Need write up from Matt here: does the search take wild-cards?
+          Is it boolean searching?  Does it automatically insert AND between search terms?  or does
+          it automatically search two terms as a phrase?]]
+         </p>
+
+         <p>
+          In the advanced search, you can create a search based on shelfmark, playwright, play, speaker, or keyword.
+         </p>
+
+         <p>
+          When looking at a record in the search result, you can click through to see multiple contexts.
+          To access facsimiles of some of the manuscripts (where there are freely available online
+          facsimiles), click the manuscript or page number.  To see the play where this is taken from,
+          click on the play title.
+         </p>
+         </section>
+      </article>
+   </main>
+{% endblock %}

@@ -11,14 +11,19 @@
 {% endblock %}
 
 {% block content %}
-   <main class="container"></main>
+   <main class="container">
+     <p>For details on the bibliography, see our <a href="about_bibliography.html">About page</a>.
+
+     <hr class="featurette-divider">
+     <div id="bibliography"></div>
+   </main>
 {% endblock %}
 
 {% block javascripts %}
    {{ super() }}
    <script>
       require(['bibliography', 'config'], function (app, config) {
-         app.initialize('main.container', config);
+         app.initialize('div.bibliography', config);
       });
    </script>
 {% endblock %}
