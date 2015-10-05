@@ -23,7 +23,7 @@
    {{ super() }}
    <script>
       require(['bibliography', 'config'], function (app, config) {
-         app.initialize('div.bibliography', config);
+         app.initialize('#bibliography', config);
       });
    </script>
 {% endblock %}

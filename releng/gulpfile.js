@@ -16,8 +16,13 @@ var uglifyJS = require('gulp-uglify');
 var srcPath = '../src/';
 var stagingPath = '../build';
 var vendorPath = stagingPath + '/vendor';
+<<<<<<< Updated upstream
 var distPath = '../dist/';
 var baseUrl = '';
+=======
+var distPath = '../dist';
+var baseUrl = '/dex';
+>>>>>>> Stashed changes
 
 
 function makeCopyTask(source, dest) {
