@@ -12,7 +12,8 @@ define(function (require) {
          formRegion: '> .row > .col-md-4 > .form',
          facetsRegion: '> .row > .col-md-4 > .facets',
          contentRegion: '> .row > .col-md-8 > .meta-content',
-         paginationRegion: '> .row > .col-md-8 > .toolbar > .pagination',
+         paginationTopRegion: '> .row > .col-md-8 > .toolbar > .pagination-top',
+         paginationBottomRegion: '> .row > .col-md-8 > .pagination-bottom',
          resultsRegion: '> .row > .col-md-8 > .result-list',
 
          normButton: '> .row > .col-md-8 > .toolbar button.show-normalized',
@@ -23,7 +24,8 @@ define(function (require) {
          form: '@ui.formRegion',
          facets: '@ui.facetsRegion',
          content: '@ui.contentRegion',
-         pagination: '@ui.paginationRegion',
+         paginationTop: '@ui.paginationTopRegion',
+         paginationBottom: '@ui.paginationBottomRegion',
          results: '@ui.resultsRegion'
       },
 

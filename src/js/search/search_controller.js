@@ -18,8 +18,12 @@ define(function (require) {
             throw new TypeError('no results region provided');
          }
 
-         if (!opts.paginationRegion) {
-            throw new TypeError('no pagination region provided');
+         if (!opts.paginationTopRegion) {
+            throw new TypeError('no top pagination region provided');
+         }
+
+         if (!opts.paginationBottomRegion) {
+            throw new TypeError('no bottom pagination region provided');
          }
 
          if (!opts.facetsRegion) {
@@ -30,7 +34,7 @@ define(function (require) {
             throw new TypeError('no repository provided');
          }
 
-         this.mergeOptions(options, ['resultsRegion', 'paginationRegion', 'facetsRegion', 'repo']);
+         this.mergeOptions(options, ['resultsRegion', 'paginationTopRegion', 'paginationBottomRegion', 'facetsRegion', 'repo']);
       },
 
       basicSearch: function (query) {
@@ -55,6 +59,23 @@ define(function (require) {
             });
       },
 
+      displayPagination: function(region, searchResponse, options) {
+        var paginatorView = new PaginatorView({
+           current: searchResponse.currentPage,
+           total: searchResponse.numPages,
+           padding: 3
+        });
+
+        this.listenTo(paginatorView, 'page', function (page) {
+           var _this = this;
+           searchResponse.getPage(page).then(function (newSearchResponse) {
+              _this.showResults(newSearchResponse, options);
+           });
+        });
+
+        region.show(paginatorView);
+      },
+
       showResults: function (searchResponse, options) {
          var opts = _.defaults(_.clone(options) || {}, {
             hideFacets: []
@@ -66,21 +87,8 @@ define(function (require) {
 
          this.resultsRegion.show(resultsView);
 
-
-         var paginatorView = new PaginatorView({
-            current: searchResponse.currentPage,
-            total: searchResponse.numPages,
-            padding: 3
-         });
-
-         this.listenTo(paginatorView, 'page', function (page) {
-            var _this = this;
-            searchResponse.getPage(page).then(function (newSearchResponse) {
-               _this.showResults(newSearchResponse, options);
-            });
-         });
-
-         this.paginationRegion.show(paginatorView);
+         this.displayPagination(this.paginationTopRegion, searchResponse, options);
+         this.displayPagination(this.paginationBottomRegion, searchResponse, options);
 
          var filteredFacets = searchResponse.facets.filter(function (facetField) {
             return !_.contains(opts.hideFacets, facetField.get('field'));

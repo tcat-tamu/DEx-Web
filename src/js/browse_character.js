@@ -30,7 +30,8 @@ define(function(require) {
       SearchApp.initialize({
          repo: extractRepo,
          resultsRegion: layout.getRegion('results'),
-         paginationRegion: layout.getRegion('pagination'),
+         paginationTopRegion: layout.getRegion('paginationTop'),
+         paginationBottomRegion: layout.getRegion('paginationBottom'),
          facetsRegion: layout.getRegion('facets'),
          channel: channel
       });

@@ -21,7 +21,8 @@ define(function (require) {
 
          var controller = new SearchController({
             resultsRegion: opts.resultsRegion,
-            paginationRegion: opts.paginationRegion,
+            paginationTopRegion: opts.paginationTopRegion,
+            paginationBottomRegion: opts.paginationBottomRegion,
             facetsRegion: opts.facetsRegion,
             repo: options.repo
          });
