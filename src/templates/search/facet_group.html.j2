@@ -1,18 +1,3 @@
-{#
-{% macro item(title, field, item) %}
-   <li class="checkbox">
-      <label>
-         <input type="checkbox" name="{{ field }}" value="{{ item.label }}"{% if item.selected %} checked{% endif %} />
-         {{ item.label }}
-         <a href="#{{ field }}={{ item.label }}" title="open in {{ title | lower }} browser">
-            <i class="fa fa-external-link-square"></i>
-            <span class="sr-only">open in browser</span>
-         </a>
-         <small class="badge">{{ item.count }}</small>
-      </label>
-   </li>
-{% endmacro %}
-#}
 
 <h1 data-toggle="collapse" data-target="#collapse-{{ field }}" aria-expanded="true" aria-controls="collapse-{{ field }}">
    <div class="pull-left">
@@ -20,44 +5,8 @@
       <i class="glyphicon glyphicon-chevron-down"></i>
    </div>
    {{ title|default(field) }}
-   {#
-   <div class="pull-right btn-group">
-      <a class="btn btn-xs btn-default icon-sort icon-sort-alpha icon-sort-alpha-asc" title="sort alphabetically">
-         <i class="fa fa-sort-alpha-asc"></i>
-         <span class="sr-only">sort alphabetically (A to Z)</span>
-      </a>
-      <a class="btn btn-group-left btn-xs btn-default icon-sort icon-sort-alpha icon-sort-alpha-desc" title="sort reverse-alphabetically">
-         <i class="fa fa-sort-alpha-desc"></i>
-         <span class="sr-only">sort reverse-alphabetically (Z to A)</span>
-      </a>
-      <a class="btn btn-xs btn-group-right btn-default icon-sort icon-sort-count icon-sort-count-asc" title="sort by count (low to high)">
-         <i class="fa fa-sort-numeric-asc"></i>
-         <span class="sr-only">sort by count (low to high)</span>
-      </a>
-      <a class="btn btn-xs btn-default icon-sort icon-sort-count icon-sort-count-desc" title="sort by count (hi to low)">
-         <i class="fa fa-sort-numeric-desc"></i>
-         <span class="sr-only">sort by count (high to low)</span>
-      </a>
-   </div>
-   #}
+
 </h1>
-<div class="facet-items collapse in" id="collapse-{{ field }}">
-   {#
-   <ul>
-      {% for i in range(0, 3 if items|length > 3 else items|length) %}
-         {{ item(title|default(field), field, items[i]) }}
-      {% endfor %}
-   </ul>
-   {% if items | length > 3 %}
-      <ul class="collapse" id="extra-{{ field }}">
-         {% for i in range(3, items|length) %}
-            {{ item(title|default(field), field, items[i]) }}
-         {% endfor %}
-      </ul>
-      <a class="collapsed toggle-extra-handle" href="#extra-{{ field }}" data-toggle="collapse">
-         <span class="show-all">Show All</span>
-         <span class="show-fewer">Show Fewer</span>
-      </a>
-   {% endif %}
-   #}
+<div class="facet-items facet-group-{{ field }} collapse in" id="collapse-{{ field }}">
+
 </div>

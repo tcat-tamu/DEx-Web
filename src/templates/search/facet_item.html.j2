@@ -1,9 +1,6 @@
 <label>
    <input type="checkbox" name="{{ field }}" value="{{ label }}"{% if selected %} checked{% endif %} />
-   {{ label }}
-   <a href="#{{ field }}={{ label }}" title="open in {{ title | lower }} browser">
-      <i class="fa fa-external-link-square"></i>
-      <span class="sr-only">open in browser</span>
-   </a>
+   <span class="item-label">{{ label }}</span>
+
    <small class="badge">{{ count }}</small>
 </label>
