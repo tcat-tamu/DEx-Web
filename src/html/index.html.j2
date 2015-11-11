@@ -19,32 +19,33 @@
          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
          <li data-target="#myCarousel" data-slide-to="1"></li>
          <li data-target="#myCarousel" data-slide-to="2"></li>
+         <li data-target="#myCarousel" data-slide-to="3"></li>
       </ol>
       <div class="carousel-inner" role="listbox">
       <!-- FIXME Correct images, links -->
          {% call carousel_item(baseUrl + '/images/banner-globe.jpg', active=true) %}
             <h1>Explore DEx: A Database of Dramatic Extracts</h1>
-            <p>Try searching by play, playwright, topic, or manuscript.  You can also check out our advanced search tips.</p>
-            <p><a class="btn btn-lg btn-primary" href="#" role="button">Explore</a></p>
+            <p>Try searching by play, playwright, topic, or manuscript.  You can also check out our <a href="search-advanced.html">advanced search tips</a>.</p>
+            <p><a class="btn btn-lg btn-primary" href="browse.html" role="button">Explore</a></p>
          {% endcall %}
 
          {% call carousel_item(baseUrl + '/images/banner-globe.jpg') %}
             <h1>DEx: A Database of Dramatic Extracts</h1>
             <p>Beta Release</p>
             <p>Find out more about the content, coverage, project sponsors and project team.</p>
-            <p><a class="btn btn-lg btn-primary" href="#" role="button">About Us</a></p>
+            <p><a class="btn btn-lg btn-primary" href="about.html" role="button">About Us</a></p>
          {% endcall %}
 
          {% call carousel_item(baseUrl + '/images/banner-globe.jpg') %}
             <h1>We welcome your feedback</h1>
-            <p>After you have a chance to explore the database, please contact us with your comments, questions, and suggestions.</p>
-            <p><a class="btn btn-lg btn-primary" href="#" role="button">Contact Us</a></p>
+            <p>After you have a chance to <a href="browse.html">explore</a> the database, please contact us with your comments, questions, and suggestions.</p>
+            <p><a class="btn btn-lg btn-primary" href="contact.html" role="button">Contact Us</a></p>
          {% endcall %}
 
          {% call carousel_item(baseUrl + '/images/banner-globe.jpg') %}
             <h1>There are more extracts to add.</h1>
             <p>Have you found an extract from an early modern play that should be included?</p>
-            <p><a class="btn btn-lg btn-primary" href="#" role="button">Submit it here!</a></p>
+            <p><a class="btn btn-lg btn-primary" href="submit.html" role="button">Submit it here!</a></p>
          {% endcall %}
       </div>
 
