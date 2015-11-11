@@ -136,7 +136,8 @@ gulp.task('html', function () {
 gulp.task('images', makeCopyTask(srcPath + '/images/**/*', distPath + '/images'));
 gulp.task('fonts', makeCopyTask([
       vendorPath + '/bootstrap/dist/fonts/*',
-      vendorPath + '/font-awesome/fonts/*'
+      vendorPath + '/font-awesome/fonts/*',
+      srcPath + '/fonts/*'
    ],
    distPath + '/fonts'
 ));
