@@ -3,11 +3,19 @@
 
 <div class="extract-citation">
    <div>from <a href="browse-manuscript.html#mss/{{ manuscript.id }}"><span>{{ manuscript.display | default(manuscript.id) }}</span> (<span>{{ author }}</span>)</a></div>
-   <div>by <span class="speakers">{% for speaker in speakers -%}
-      <a class="speaker" href="browse-character.html#chars/{{ speaker.id }}">{{ speaker.display | default(speaker.id) }}</a>
-      {%- if not loop.last %}, {% endif -%}
-   {%- endfor %}</span> in <a href="browse-play.html#plays/{{ source.id }}" class="source"><em>{{ source.display | default(source.id) }}</em></a> (<span class="playwrights">{% for playwright in playwrights -%}
-      <a class="playwright" href="browse-playwright.html#pws/{{ playwright.id }}">{{ playwright.display | default(playwright.id) }}</a>
-      {%- if not loop.last %}, {% endif -%}
-   {%- endfor %}</span>) <span class="source-line-ref">{{ sourceLineRef }}</span></div>
+   <div>by
+     <span class="speakers">
+       {% for speaker in speakers -%}
+          <a class="speaker" href="browse-character.html#chars/{{ speaker.id }}">{{ speaker.display | default(speaker.id) }}</a>
+          {%- if not loop.last %}, {% endif -%}
+       {%- endfor %}
+     </span>
+     in <a href="browse-play.html#plays/{{ source.id }}" class="source"><em>{{ source.display | default(source.id) }}</em></a>
+     {% if playwrights %}
+       (<span class="playwrights">{% for playwright in playwrights -%}<a class="playwright" href="browse-playwright.html#pws/{{ playwright.id }}">{{ playwright.display | default(playwright.id) }}</a>{%- if not loop.last %}, {% endif -%}{%- endfor %}</span>)
+     {% endif %}
+       <span class="source-line-ref">{{ sourceLineRef }}</span>{% if folio %};
+       <span class="source-line-ref">{{ folio }}</span>
+     {% endif %}
+   </div>
 </div>
