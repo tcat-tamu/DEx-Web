@@ -24,14 +24,13 @@ define(function (require) {
             paginationTopRegion: opts.paginationTopRegion,
             paginationBottomRegion: opts.paginationBottomRegion,
             facetsRegion: opts.facetsRegion,
-            repo: options.repo
+            repo: options.repo,
+            channel: opts.channel
          });
 
          var router = new SearchRouter({
             controller: controller
          });
-
-
 
          opts.channel.on('search:basic', function (query) {
             controller.basicSearch(query);
@@ -41,11 +40,9 @@ define(function (require) {
             controller.advancedSearch(params);
          });
 
-
          opts.channel.on('search:clear', function () {
             controller.clearResults();
          });
-
 
          opts.channel.on('search:character', function (id) {
             controller.browseBy('character', id);

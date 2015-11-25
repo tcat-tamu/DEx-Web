@@ -34,7 +34,11 @@ define(function (require) {
             throw new TypeError('no repository provided');
          }
 
-         this.mergeOptions(options, ['resultsRegion', 'paginationTopRegion', 'paginationBottomRegion', 'facetsRegion', 'repo']);
+         if (!opts.channel) {
+            throw new TypeError('no channel provided');
+         }
+
+         this.mergeOptions(options, ['resultsRegion', 'paginationTopRegion', 'paginationBottomRegion', 'facetsRegion', 'repo', 'channel']);
       },
 
       basicSearch: function (query) {
@@ -104,6 +108,14 @@ define(function (require) {
             searchResponse.facet(searchResponse.facets.getSelected()).then(function (newSearchResponse) {
                _this.showResults(newSearchResponse, options);
             });
+         });
+
+         this.listenToOnce(this.channel, 'setPageSize', function(data) {
+           var _this = this;
+
+           searchResponse.setPageSize(data.pageSize).then(function(newSearchResponse) {
+             _this.showResults(newSearchResponse, options);
+           });
          });
 
          this.facetsRegion.show(facetsView);

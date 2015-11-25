@@ -11,8 +11,24 @@
             <button type="button" class="btn btn-default show-normalized active">Normalized</button>
             <button type="button" class="btn btn-default show-original">Original</button>
          </div>
+         <span class="select-num-results">
+           <div class="btn-group num-results-selector" role="group">
+             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               # / page
+               <span class="caret"></span>
+             </button>
+             <ul class="dropdown-menu">
+               <li><a data-value="10" href="#">10</a></li>
+               <li><a data-value="25" href="#">25</a></li>
+               <li><a data-value="50" href="#">50</a></li>
+               <li><a data-value="100" href="#">100</a></li>
+               <li><a data-value="250" href="#">250</a></li>
+               <li><a data-value="500" href="#">500</a></li>
+             </ul>
+           </div>
+         </span>
       </div>
       <div class="result-list show-normalized"></div>
-      <nav class="pagination pagination-bottom"></nav>
+      <nav class="pagination pagination-bottom"> </nav>
    </div>
 </div>

@@ -106,30 +106,37 @@ define(function (require) {
 
          var repo = this;
 
-         return RestClient.get(this.apiEndpoint + '/search', queryParams).then(function (response) {
-            return {
-               currentPage: opts.page,
-               numPages: Math.ceil(response.numFound / response.numResultsPerPage),
-               results: new ExtractProxyCollection(response.results),
+         return RestClient.get(this.apiEndpoint + '/search', queryParams)
+                          .then(function (response) {
+                              // TODO turn this into a method call/object intantiation
+                              return {
+                                 currentPage: opts.page,
+                                 numPages: Math.ceil(response.numFound / response.numResultsPerPage),
+                                 results: new ExtractProxyCollection(response.results),
 
-               facets: new FacetFieldCollection(_.map(response.facets, function (items, field) {
-                  return {
-                     field: (field === 'speaker') ? 'character' : field,
-                     items: items
-                  };
-               }), { parse: true }),
+                                 facets: new FacetFieldCollection(_.map(response.facets, function (items, field) {
+                                    return {
+                                       field: (field === 'speaker') ? 'character' : field,
+                                       items: items
+                                    };
+                                 }), { parse: true }),
 
-               getPage: function (p) {
-                  return repo.search(_.extend(_.clone(opts), { page: p }));
-               },
+                                 getPage: function (p) {
+                                    return repo.search(_.extend(_.clone(opts), { page: p }));
+                                 },
 
-               facet: function (facets) {
-                  return repo.search(_.extend(_.clone(opts), { page: 1, facets: facets }));
-               }
-            };
-         }).catch(function (err) {
-            throw new Error('Unable to fetch results from server: ' + err.error);
-         });
+                                 facet: function (facets) {
+                                    return repo.search(_.extend(_.clone(opts), { page: 1, facets: facets }));
+                                 },
+
+                                 setPageSize: function(sz) {
+                                    return repo.search(_.extend(_.clone(opts), { page: 1, resultsPerPage: sz }));
+
+                                 }
+                              };
+                            }).catch(function (err) {
+                              throw new Error('Unable to fetch results from server: ' + err.error);
+                            });
       }
 
    });

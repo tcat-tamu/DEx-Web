@@ -23,9 +23,13 @@ define(function(require) {
          el: el
       });
 
-      layout.render();
-
       var channel = Radio.channel('dex');
+
+      layout.on('setPageSize', function(data) {
+        channel.trigger('setPageSize', data);
+      });
+
+      layout.render();
 
       PlayApp.initialize({
          repo: playsRepo,

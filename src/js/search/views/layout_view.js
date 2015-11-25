@@ -44,6 +44,15 @@ define(function (require) {
             this.ui.resultsRegion
                .addClass('show-original')
                .removeClass('show-normalized');
+         },
+
+         'click .num-results-selector li a': function(evt) {
+           evt.preventDefault();
+           var numResults = evt.target.dataset.value;
+
+           this.trigger('setPageSize', {
+             pageSize: numResults
+           });
          }
       }
    });
