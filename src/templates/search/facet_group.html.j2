@@ -5,7 +5,9 @@
       <i class="glyphicon glyphicon-chevron-down"></i>
    </div>
    {{ title|default(field) }}
-
+   <div class="see-all pull-right">
+     <a href="browse-{{ field }}.html">see all</a>
+   </div>
 </h1>
 <div class="facet-items facet-group-{{ field }} collapse in" id="collapse-{{ field }}">
 
