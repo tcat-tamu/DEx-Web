@@ -55,9 +55,17 @@ define(function (require) {
 
    var PlayCollection = Backbone.Collection.extend({
       model: Play,
-      comparator: 'title'
-   });
+      comparator: function(play) {
+        var pw = play.get('playwrights')[0];
+        if (pw == null) {
+          return 'unknown';
+        }
 
+        var ix = pw.lastIndexOf(' ');
+        return pw.substring(ix).trim();
+
+      }
+   });
 
    var Bibliography = Backbone.Model.extend({
 
