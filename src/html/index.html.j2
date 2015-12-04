@@ -1,7 +1,7 @@
 {% extends '_layout.html.j2' %}
 
-{% macro carousel_item(image, active=false) %}
-   <div class="item{% if active %} active{% endif %}" style="background-image: url({{ image }});">
+{% macro carousel_item(image, class='', active=false) %}
+   <div class="item{% if active %} active{% endif %} {{ class }}" style="background-image: url({{ image }});">
       <div class="container">
          <div class="carousel-caption">{{ caller() }}</div>
       </div>
@@ -25,24 +25,24 @@
       <!-- FIXME Correct images, links -->
          {% call carousel_item(baseUrl + '/images/banner-globe.jpg', active=true) %}
             <h1>Explore DEx: A Database of Dramatic Extracts</h1>
-            <p>Try searching by play, playwright, topic, or manuscript.  You can also check out our <a href="search-advanced.html">advanced search tips</a>.</p>
+            <p>Try searching by play, playwright, topic, or manuscript.  You can also check out our <a href="about_use.html">advanced search tips</a>.</p>
             <p><a class="btn btn-lg btn-primary" href="browse.html" role="button">Explore</a></p>
          {% endcall %}
 
-         {% call carousel_item(baseUrl + '/images/banner-globe.jpg') %}
+         {% call carousel_item(baseUrl + '/images/globe_drawing.jpg', class='light top') %}
             <h1>DEx: A Database of Dramatic Extracts</h1>
             <p>Beta Release</p>
             <p>Find out more about the content, coverage, project sponsors and project team.</p>
             <p><a class="btn btn-lg btn-primary" href="about.html" role="button">About Us</a></p>
          {% endcall %}
 
-         {% call carousel_item(baseUrl + '/images/banner-globe.jpg') %}
+         {% call carousel_item(baseUrl + '/images/commonplace-book.jpg', class='light bottom') %}
             <h1>We welcome your feedback</h1>
             <p>After you have a chance to <a href="browse.html">explore</a> the database, please contact us with your comments, questions, and suggestions.</p>
             <p><a class="btn btn-lg btn-primary" href="contact.html" role="button">Contact Us</a></p>
          {% endcall %}
 
-         {% call carousel_item(baseUrl + '/images/banner-globe.jpg') %}
+         {% call carousel_item(baseUrl + '/images/hold_pen.jpg', class='light top') %}
             <h1>There are more extracts to add.</h1>
             <p>Have you found an extract from an early modern play that should be included?</p>
             <p><a class="btn btn-lg btn-primary" href="submit.html" role="button">Submit it here!</a></p>
@@ -77,7 +77,7 @@
             <a href="about.html"><img class="img-circle" src="{{ baseUrl }}/images/va342-center-stamps.jpg" alt="Center Stamps" width="140" height="140"></a>
             <h2>About</h2>
             <p>
-               DEx is on an online, searchable database of extracts transcribed from these manuscripts and published as an electronic edition by Iter: Gateway to the Middle Ages and Renaissance. This, however, is placeholder text and will be replaced as soon as possible.
+               DEx is an online, searchable database of dramatic extracts found in seventeenth-century manuscripts. DEx is published by Iter: Gateway to the Middle Ages and Renaissance.
             </p>
          </div>
 
